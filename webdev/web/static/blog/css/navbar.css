@@ -1,0 +1,16 @@
+.dropdown-menu li {
+    position: relative !important;
+  }
+  .dropdown-menu .dropdown-submenu {
+    display: none !important;
+    position: absolute !important;
+    left: 100% !important;
+    top: -7px !important;
+  }
+  .dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+  }
+  .dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+  }

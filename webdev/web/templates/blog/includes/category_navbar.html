@@ -1,0 +1,10 @@
+{% if category.children.all %}
+    <ul>
+    {% for category in category.children.shown %}
+        <li>
+        <a href="{% url 'blog:category' category.slug %}">{{ category.title }}</a>
+        </li>
+        {% include 'blog/includes/category_navbar.html' %}
+    {% endfor %}
+    </ul>
+{% endif %}

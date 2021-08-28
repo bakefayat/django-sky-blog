@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+{{ object.title }}
+{% endblock %}
+{% block head_title %}
+{{object.title}}
+{% endblock %}
+{% block blog_post %}
+    <div class="card mb-1">
+        <img class="card-img-top" src="{{ object.image.url }}"  alt="{{ object.slug}}" style='height:300px;' />
+        <div class="card-body">
+            <div class="small text-muted">{{ object.jpublished }}</div>
+            <p class="card-text">{{ object.description|linebreaks }}</p>
+            {% for cat in object.category_published.all %}
+            <a href="{% url 'blog:category' cat.slug %}"># {{ cat.title }}</a>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
