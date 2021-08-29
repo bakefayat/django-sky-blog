@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.html import format_html
 from extentions.utils import to_jalali
 
 
@@ -67,8 +68,11 @@ class Blog(models.Model):
     def jpublished(self):
         return to_jalali(self.published)
 
+    def thumb(self):
+        return format_html(f"<img src='{self.image.url}' height=80px width=100px style='border-radius:20px;'>")
 
     objects = PublishedArticle()
 
     jpublished.short_description = 'زمان انتشار'
     categoryList.short_description = 'دسته بندی'
+    thumb.short_description = 'تصویر بندانگشتی'

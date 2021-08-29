@@ -15,7 +15,7 @@ def make_draft(modeladmin, request, queryset):
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title','slug','jpublished','status','categoryList')
+    list_display = ('title', 'thumb', 'slug','jpublished','status','categoryList')
     ordering = ['title', 'published']
     list_filter = ['category']
     prepopulated_fields = {'slug': ('title',)}
