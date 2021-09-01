@@ -58,11 +58,7 @@ class Blog(models.Model):
 
     
     def categoryList(self):
-        return '، '.join([i.title for i in self.category.filter(display=True)])
-
-
-    def category_published(self):
-        return self.category.filter(display=True)
+        return '، '.join([i.title for i in self.category.shown()])
 
 
     def jpublished(self):

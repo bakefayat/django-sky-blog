@@ -21,9 +21,9 @@ home page
         </div>
     {% endfor %}
     {% if page_obj.has_next %}
-        <a href="{% url 'blog:index' page_obj.next_page_number %}">مقالات قدیمی تر</a>
+        <a href="{% url 'blog:category' user.slug page_obj.next_page_number %}">مقالات قدیمی تر</a>
     {% endif %}
     {% if page_obj.has_previous %}
-    <a href="{% url 'blog:index' page_obj.previous_page_number %}">مقالات جدید تر</a>
-    {% endif %}
+    <a href="{% url 'blog:category' user.slug  page_obj.previous_page_number %}">مقالات جدید تر</a>
+{% endif %}
 {% endblock %}

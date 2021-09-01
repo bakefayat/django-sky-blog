@@ -11,8 +11,8 @@
         <div class="card-body">
             <div class="small text-muted">{{ object.jpublished }}</div>
             <p class="card-text">{{ object.description|linebreaks }}</p>
-            {% for cat in object.category_published.all %}
-            <a href="{% url 'blog:category' cat.slug %}"># {{ cat.title }}</a>
+            {% for cat in object.category.shown %}
+            <a href="{% url 'blog:category' cat.slug %}">#{{ cat.title }}</a>
         {% endfor %}
         </div>
     </div>

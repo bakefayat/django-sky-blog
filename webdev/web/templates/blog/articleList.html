@@ -1,0 +1,14 @@
+{% extends 'blog/list.html' %}
+{% load tags %}
+{% block head_title %}
+    home page
+{% endblock %}
+{% block head_description %}
+    صفحه خانگی وب سایت ما اینجا می باشد.
+{% endblock %}
+{% block next_page %}
+    {% url 'blog:index' page_obj.next_page_number %}
+{% endblock %}
+{% block previous_page %}
+    {% url 'blog:index' page_obj.previous_page_number %}
+{% endblock %}
