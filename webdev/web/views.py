@@ -40,7 +40,7 @@ class CategoryList(ListView):
 class UserList(ListView):
     def get_queryset(self):
         global user
-        username = self.kwargs.get('username')
+        username = self.kwargs.get('slug')
         user = get_object_or_404(User, username=username)
         return user.articles.all()
     
@@ -53,29 +53,3 @@ class UserList(ListView):
     
     template_name = 'blog/userList.html'
     paginate_by = 2
-
-
-def blog(request, page=1):
-    article_list = Blog.objects.all().filter(status='p')
-    pagination = Paginator(article_list, 2)
-    articles = pagination.get_page(page)
-    context = {'articles': articles}
-    return render(request, 'blog/index.html', context)
-
-
-def single(request, slug):
-    single= get_object_or_404(Blog, slug=slug, status='p')
-    context = {'article': single}
-    return render(request, 'blog/single.html', context)
-
-
-# def category(request, slug, page=1):
-#     category = get_object_or_404(Category, slug=slug)
-#     articles_list = category.articles.published()
-#     pagination = Paginator(articles_list, 1)
-#     articles = pagination.get_page(page)
-#     context = {
-#         'articles': articles,
-#         'category': category,
-#         }
-#     return render(request, 'blog/category.html', context)

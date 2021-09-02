@@ -4,7 +4,7 @@
 {{ category.title }}
 {% endblock %}
 {% block head_description %}
-صفحه دسته بندی {{ user.get_full_name }} وب سایت ما اینجا می باشد.
+مقالات {{ user.get_full_name }} اینجا می باشد.
 {% endblock %}
 {% block next_page %}
     {% url 'blog:user' user.username page_obj.next_page_number %}
