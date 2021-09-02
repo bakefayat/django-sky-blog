@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.deletion import SET_NULL
 from django.utils import timezone
 from django.utils.html import format_html
 from extentions.utils import to_jalali
@@ -48,6 +49,7 @@ class Blog(models.Model):
     )
     title = models.CharField(max_length=255, verbose_name='عنوان')
     slug = models.SlugField(unique=True, max_length=20, allow_unicode=True,verbose_name='نامک')
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
     description = models.TextField(max_length=1000,verbose_name='توضیحات')
     image = models.ImageField(upload_to='images',verbose_name='تصویر شاخص')
     published = models.DateTimeField(default= timezone.now,verbose_name='تاریخ انتشار')

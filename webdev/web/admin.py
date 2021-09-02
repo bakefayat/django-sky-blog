@@ -7,6 +7,7 @@ def make_published(modeladmin, request, queryset):
         queryset.update(status='p')
         modeladmin.message_user(request, 'با موفقیت انتشار یافت', messages.SUCCESS)
 
+
 @admin.action(description='پیش نویس مقالات انتخاب شده')
 def make_draft(modeladmin, request, queryset):
         queryset.update(status='d')
@@ -15,7 +16,7 @@ def make_draft(modeladmin, request, queryset):
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'thumb', 'slug','jpublished','status','categoryList')
+    list_display = ('title', 'thumb', 'author', 'slug','jpublished','status','categoryList')
     ordering = ['title', 'published']
     list_filter = ['category']
     prepopulated_fields = {'slug': ('title',)}

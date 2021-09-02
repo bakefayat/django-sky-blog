@@ -40,8 +40,8 @@ class CategoryList(ListView):
 class UserList(ListView):
     def get_queryset(self):
         global user
-        username = self.kwargs.get('slug')
-        user = get_object_or_404(User.objects.all(), username=username)
+        username = self.kwargs.get('username')
+        user = get_object_or_404(User, username=username)
         return user.articles.all()
     
 
