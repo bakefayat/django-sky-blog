@@ -8,7 +8,7 @@ from web.models import Blog
 
 @login_required
 def home(request):
-    return render(request, 'registration/home.html')
+    return render(request, 'registration/admin.html')
 
 
 class home_blog(LoginRequiredMixin, ListView):

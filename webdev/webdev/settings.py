@@ -28,6 +28,8 @@ SECRET_KEY = '@a@1d3_9^kme5ap6^+0=m&cpo3zzl19!)czws8$l!^+5_c&jhj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
 ALLOWED_HOSTS = []
 
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'api',
     'account.apps.AccountConfig',
     'extentions',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
