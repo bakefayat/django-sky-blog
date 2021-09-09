@@ -5,8 +5,7 @@
 
 from django.contrib.auth import views
 from django.urls import path
-from .views import home
-
+from .views import Home, ArticleList
 app_name = 'account'
 urlpatterns = [
     path('login/', views.LoginView.as_view(), name='login'),
@@ -22,5 +21,6 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('', home, name='home'),
+    path('', Home.as_view(), name='home'),
+    path('articles/', ArticleList.as_view(), name='list')
 ]

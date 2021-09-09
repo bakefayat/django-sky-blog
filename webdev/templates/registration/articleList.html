@@ -1,0 +1,22 @@
+{% extends 'registration/base.html' %}
+
+{% block main %}
+    <div class="content-wrapper">
+        <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row pr-3">
+                <ul>
+                    {% for article in object_list %}
+                        <li>{{ article.title }}</li>
+                    {% endfor %}
+                </ul>
+            <!-- ./col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+        </section>
+    </div>
+{% endblock %}
