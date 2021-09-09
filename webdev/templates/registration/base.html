@@ -59,7 +59,13 @@
   </nav>
   <!-- /.navbar -->
     {% include 'registration/sidebar.html' %}
-    {% block main %}بلاک اصلی{% endblock %}
+    <div class="content-wrapper">
+      <section class="content">
+        <div class="container-fluid">
+          {% block main %}بلاک اصلی{% endblock %}
+        </div>
+      </section>
+    </div>
     <footer class="main-footer">
     <strong>تمامی حقوق محفوظ است.</strong>
     <div class="float-right d-none d-sm-inline-block">
