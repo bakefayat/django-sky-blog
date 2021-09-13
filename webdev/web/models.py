@@ -4,6 +4,7 @@ from django.db.models.deletion import SET_NULL
 from django.utils import timezone
 from django.utils.html import format_html
 from extentions.utils import to_jalali
+from django.urls import reverse
 
 
 class PublishedArticle(models.Manager):
@@ -68,6 +69,9 @@ class Blog(models.Model):
 
     def thumb(self):
         return format_html(f"<img src='{self.image.url}' height=80px width=100px style='border-radius:20px;'>")
+
+    def get_absolute_url(self):
+        return reverse('account:list')
 
     objects = PublishedArticle()
 

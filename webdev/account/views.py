@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from web.models import Blog
 
 # Create your views here.
@@ -27,8 +27,7 @@ class ArticleList(LoginRequiredMixin, ListView):
             return Blog.objects.filter(author=self.request.user)
 
 
-class home_blog(LoginRequiredMixin, ListView):
-    queryset = Blog.objects.published()
-    paginate_by = 2
-    template_name = 'blog/articleList.html'
-
+class CreateArticle(LoginRequiredMixin, CreateView):
+    model = Blog
+    fields = ['title' , 'slug' , 'author' , 'description' , 'image' , 'published' , 'status' , 'category']
+    template_name = 'registration/articleCreate.html'
