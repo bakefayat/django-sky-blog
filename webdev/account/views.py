@@ -20,10 +20,15 @@ class Home(LoginRequiredMixin, TemplateView):
 
 class ArticleList(LoginRequiredMixin, ListView):
     template_name = 'registration/articleList.html'
-    queryset = Blog.objects.all()
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return(Blog.objects.all())
+        else:
+            return Blog.objects.filter(author=self.request.user)
 
 
 class home_blog(LoginRequiredMixin, ListView):
     queryset = Blog.objects.published()
     paginate_by = 2
     template_name = 'blog/articleList.html'
+
