@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'extentions',
     'widget_tweaks',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

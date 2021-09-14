@@ -1,8 +1,40 @@
 {% extends 'registration/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block main %}
-    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-        <button>ثبت</form>
-    </form>
+    <div class="mt-2 card card-primary">    
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.title|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.slug|as_crispy_field }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form.description|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.image|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.published|as_crispy_field }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form.category|as_crispy_field }}
+                        </div>
+                        {% if request.user.is_superuser %}
+                        <div class="col-md-6">
+                            {{ form.author|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.status|as_crispy_field }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <button class="btn btn-primary">ثبت</form>
+        </form>
+    </div>
 {% endblock %}

@@ -31,3 +31,11 @@ class CreateArticle(LoginRequiredMixin, CreateView):
     model = Blog
     fields = ['title' , 'slug' , 'author' , 'description' , 'image' , 'published' , 'status' , 'category']
     template_name = 'registration/articleCreate.html'
+
+    def form_valid(self, form):
+        if not(self.request.user.is_superuser):
+            author = self.request.user
+            status = 'd'
+            form.instance.author = author
+            form.instance.status = status
+        return super().form_valid(form)
