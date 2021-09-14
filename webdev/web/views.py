@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_list_or_404, render, get_object_or_404
 from .models import Blog, Category
-from django.contrib.auth.models import User
+from account.models import User
 
 
 class ArticleList(ListView):
