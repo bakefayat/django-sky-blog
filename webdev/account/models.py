@@ -10,3 +10,5 @@ class User(AbstractUser):
         if self.special_user > timezone.now():
             return True
         return False
+    is_specialuser.short_description = 'کاربر ویژه'
+    is_specialuser.boolean = True
