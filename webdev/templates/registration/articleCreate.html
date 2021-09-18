@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             {{ form.category|as_crispy_field }}
                         </div>
-                        {% if request.user.is_superuser %}
+                        {% if user.is_superuser %}
                         <div class="col-md-6">
                             {{ form.author|as_crispy_field }}
                         </div>
