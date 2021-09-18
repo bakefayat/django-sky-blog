@@ -20,9 +20,9 @@
                     <tbody>
                     {% for article in object_list %}
                     <tr>
-                        <td>{{ article.title }}</td>
+                        <td><a href="{% url 'account:update' article.pk %}">{{ article.title }}</a></td>
                         <td><img src='{{ article.image.url }}' class='img-responsive' width=120px></td>
-                        <td>{{ article.description|truncatewords:'20' }}</td>
+                        <td>{{ article.description|safe|truncatewords:'20' }}</td>
                         <td>{{ article.categoryList }}</td>
                         <td>{{ article.author.get_full_name }}</td>
                         <td>{{ article.jpublished }}</td>

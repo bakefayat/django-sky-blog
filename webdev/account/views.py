@@ -1,10 +1,10 @@
 from django.http import request
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView, CreateView, UpdateView
 from web.models import Blog
-from .mixins import FieldsMixin, FormValidMixin
+from .mixins import FieldsMixin, FormValidMixin, UpdateAccessMixin
 # Create your views here.
 
 # @login_required
@@ -27,5 +27,10 @@ class ArticleList(LoginRequiredMixin, ListView):
 
 
 class CreateArticle(LoginRequiredMixin, FormValidMixin, FieldsMixin, CreateView):
+    model = Blog
+    template_name = 'registration/articleCreate.html'
+
+
+class UpdateArticle(LoginRequiredMixin, UpdateAccessMixin, FormValidMixin, FieldsMixin, UpdateView):
     model = Blog
     template_name = 'registration/articleCreate.html'
