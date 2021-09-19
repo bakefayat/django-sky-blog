@@ -9,11 +9,11 @@
                     <thead>
                     <tr>
                         <th>عنوان</th>
-                        <th>تصویر</th>
-                        <th>خلاصه</th>
+                        <th class='d-none d-lg-table-cell'>تصویر</th>
+                        <th class='d-none d-lg-table-cell'>خلاصه</th>
                         <th>دسته بندی</th>
                         <th>نویسنده</th>
-                        <th>تاریخ انتشار</th>
+                        <th class=''>تاریخ انتشار</th>
                         <th>وضعیت انتشار</th>
                     </tr>
                     </thead>
@@ -21,20 +21,23 @@
                     {% for article in object_list %}
                     <tr>
                         <td><a href="{% url 'account:update' article.pk %}">{{ article.title }}</a></td>
-                        <td><img src='{{ article.image.url }}' class='img-responsive' width=120px></td>
-                        <td>{{ article.description|safe|truncatewords:'20' }}</td>
+                        <td class='d-none d-lg-table-cell'><img src='{{ article.image.url }}' class='img-responsive' width=120px></td>
+                        <td class='d-none d-lg-table-cell'>{{ article.description|safe|truncatewords:'20' }}</td>
                         <td>{{ article.categoryList }}</td>
                         <td>{{ article.author.get_full_name }}</td>
-                        <td>{{ article.jpublished }}</td>
+                        <td class="">{{ article.jpublished }}</td>
                         <td>
                             {% if article.status == 'p' %}
-                                <span class="badge badge-success">منتشر شده</span>
+                                <span class="badge badge-success">منتشر شده</span><br>
                                 <a href="{% url 'blog:single' article.slug %}">
-                                    <span class="badge badge-primary">نمایش در سایت</span>
+                                    <span class="badge badge-primary">نمایش در سایت</span><br>
                                 </a>
                             {% else %}
-                                <span class="badge badge-danger">پیش نویس</span>
+                                <span class="badge badge-warning">پیش نویس</span><br>
                             {% endif %}
+                            <a href="{% url 'account:delete' article.pk %}">
+                                <span class="badge badge-danger">حذف مقاله</span>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

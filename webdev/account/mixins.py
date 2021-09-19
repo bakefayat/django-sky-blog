@@ -12,7 +12,7 @@ class FieldsMixin():
                 'title' , 'slug' , 'description' , 'image' , 'category', 'published'
             ]
         else:
-            raise Http404
+            raise Http404('no permision')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -27,7 +27,7 @@ class FormValidMixin():
         return super().form_valid(form)
 
 
-class UpdateAccessMixin():
+class UpdateAccessMixin:
     def dispatch(self, request, pk, *args, **kwargs):
         article = get_object_or_404(Blog, pk=pk)
         if request.user.is_superuser\
@@ -35,4 +35,24 @@ class UpdateAccessMixin():
         or request.user == article.author:
             return super().dispatch(request, *args, **kwargs)
         else:
-            return Http404("you can't access this.")
+            raise Http404("you can't access this.")
+
+
+class DraftEditMixin:
+    def dispatch(self, request, pk, *args, **kwargs):
+        article = get_object_or_404(Blog, pk=pk)
+        if article.status == 'p' and request.user.is_author:
+            raise Http404("you can't edit published article.")
+        else:
+            return super().dispatch(request, pk, *args, **kwargs)
+
+
+class DeleteArticleMixin:
+    def dispatch(self, request, pk, *args, **kwargs):
+        article = get_object_or_404(Blog, pk=pk)
+        if request.user.is_superuser\
+        or request.user.is_staff\
+        or request.user.is_author and article.author == request.user:
+            return super().dispatch(request, pk, *args, **kwargs)
+        else:
+            raise Http404('you have no permision to delete this article.')
