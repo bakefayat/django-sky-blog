@@ -1,15 +1,14 @@
 from django.http import request
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from web.models import Blog
-from .mixins import DeleteArticleMixin, FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin
+from .mixins import DeleteArticleMixin, FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin
 
 class Home(LoginRequiredMixin, TemplateView):
     template_name = 'registration/admin.html'
-
 
 
 class ArticleList(LoginRequiredMixin, ListView):
@@ -35,3 +34,10 @@ class DeleteArticle(DeleteArticleMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('account:list')
     template_name = 'registration/articleDelete.html'
+
+
+class PreviewArticle(PreviewMixin, DetailView):
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Blog, slug=slug)
+    template_name = 'blog/articleDetail.html'

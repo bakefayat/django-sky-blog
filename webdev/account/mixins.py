@@ -56,3 +56,15 @@ class DeleteArticleMixin:
             return super().dispatch(request, pk, *args, **kwargs)
         else:
             raise Http404('you have no permision to delete this article.')
+
+
+class PreviewMixin:
+    def dispatch(self, request, slug, *args, **kwargs):
+        article = get_object_or_404(Blog, slug=slug)
+        if request.user.is_superuser\
+        or request.user.is_staff\
+        or request.user == article.author:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404("you can't access this.")
+
