@@ -50,12 +50,16 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{% url 'blog:index' %}" class="nav-link">نمایش سایت</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{% url 'account:login' %}" class="nav-link">TODO:خروج</a>
+    </ul>
+    <ul class="navbar-nav mr-auto-navbav">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:logout' %}">
+          <i class="fa fa-sign-out-alt"></i></a>
+        </a>
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
   </nav>
   <!-- /.navbar -->
     {% include 'registration/sidebar.html' %}
