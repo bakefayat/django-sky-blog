@@ -1,0 +1,10 @@
+<li class="nav-item">
+    <a href="{% url url %}" class="nav-link
+    {% if request.resolver_match.url_name == url_name %}
+        active
+    {% endif %}
+    ">
+      <i class="fa {{fa}} nav-icon"></i>
+      <p>{{content}}</p>
+    </a>
+</li>
