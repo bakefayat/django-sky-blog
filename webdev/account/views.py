@@ -27,7 +27,7 @@ class CreateArticle(LoginRequiredMixin, FormValidMixin, FieldsMixin, CreateView)
 
 class UpdateArticle(DraftEditMixin, LoginRequiredMixin, UpdateAccessMixin, FormValidMixin, FieldsMixin, UpdateView):
     model = Blog
-    template_name = 'registration/articleCreate.html'
+    template_name = 'registration/articleUpdate.html'
 
 
 class DeleteArticle(DeleteArticleMixin, DeleteView):
