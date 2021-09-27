@@ -46,7 +46,9 @@ class Blog(models.Model):
 
     STATUS_CHOICES = (
         ('d', 'پیش نویس'),
-        ('p', 'منتشر شده')
+        ('p', 'منتشر شده'),
+        ('w', 'در انتظار تایید'),
+        ('r', 'رد شده'),
     )
     title = models.CharField(max_length=255, verbose_name='عنوان')
     slug = models.SlugField(unique=True, max_length=20, allow_unicode=True,verbose_name='نامک')

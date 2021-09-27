@@ -33,11 +33,21 @@
                                                 <a href="{% url 'blog:single' article.slug %}">
                                                     <span class="badge badge-primary">نمایش در سایت</span><br>
                                                 </a>
-                                            {% else %}
+                                            {% elif article.status == 'd' %}
                                                 <span class="badge badge-warning">پیش نویس</span><br>
                                                 <a href="{% url 'account:preview' article.slug %}">
                                                     <span class="badge badge-primary">پیش نمایش</span><br>
                                                 </a>
+                                            {% elif article.status == 'w' %}
+                                            <span class="badge badge-secondary">در انتظار تایید</span><br>
+                                            <a href="{% url 'account:preview' article.slug %}">
+                                                <span class="badge badge-primary">پیش نمایش</span><br>
+                                            </a>                                            
+                                            {% elif article.status == 'r' %}
+                                            <span class="badge badge-danger">رد شده</span><br>
+                                            <a href="{% url 'account:preview' article.slug %}">
+                                                <span class="badge badge-primary">پیش نمایش</span><br>
+                                            </a>
                                             {% endif %}
                                             <a href="{% url 'account:delete' article.pk %}">
                                                 <span class="badge badge-danger">حذف مقاله</span>

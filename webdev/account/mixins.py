@@ -23,7 +23,7 @@ class FormValidMixin():
         else:
             self.obj = form.save(commit=False)
             self.obj.author = self.request.user
-            self.obj.status = 'd'
+            self.obj.status = 'w'
         return super().form_valid(form)
 
 
