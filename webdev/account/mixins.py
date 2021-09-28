@@ -5,11 +5,11 @@ class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser or request.user.is_staff:
             self.fields = [
-                'title' , 'slug' , 'author' , 'description' , 'image' , 'published' , 'status' , 'category'
+                'title' , 'slug' , 'author' , 'description' , 'image' , 'is_special', 'published' , 'status' , 'category'
             ]
         elif request.user.is_author:
             self.fields = [
-                'title' , 'slug' , 'description' , 'image' , 'category', 'published'
+                'title' , 'slug' , 'description' , 'image' , 'category', 'is_special', 'published'
             ]
         else:
             raise Http404('no permision')

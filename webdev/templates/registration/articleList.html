@@ -14,19 +14,41 @@
                                 <th class='d-none d-lg-table-cell'>خلاصه</th>
                                 <th>دسته بندی</th>
                                 <th>نویسنده</th>
-                                <th class=''>تاریخ انتشار</th>
+                                <th>تاریخ انتشار</th>
+                                <th>مقاله ویژه</th>
                                 <th>وضعیت انتشار</th>
                             </tr>
                             </thead>
                             <tbody>
                                 {% for article in object_list %}
                                     <tr>
-                                        <td><a href="{% url 'account:update' article.pk %}">{{ article.title }}</a></td>
-                                        <td class='d-none d-lg-table-cell'><img src='{{ article.image.url }}' class='img-responsive' width=120px></td>
-                                        <td class='d-none d-lg-table-cell'>{{ article.description|safe|truncatewords:'20' }}</td>
-                                        <td>{{ article.categoryList }}</td>
-                                        <td>{{ article.author.get_full_name }}</td>
-                                        <td class="">{{ article.jpublished }}</td>
+                                        <td>
+                                            <a href="{% url 'account:update' article.pk %}">
+                                                {{ article.title }}
+                                            </a>
+                                        </td>
+                                        <td class='d-none d-lg-table-cell'>
+                                            <img src='{{ article.image.url }}' class='img-responsive' width=120px>
+                                        </td>
+                                        <td class='d-none d-lg-table-cell'>
+                                            {{ article.description|safe|truncatewords:'20' }}
+                                        </td>
+                                        <td>
+                                            {{ article.categoryList }}
+                                        </td>
+                                        <td>
+                                            {{ article.author.get_full_name }}
+                                        </td>
+                                        <td>
+                                            {{ article.jpublished }}
+                                        </td>
+                                        <td>
+                                            {% if article.is_special %}
+                                                <i class="fa fa-check-circle" style="color:green"></i>
+                                            {% else %}
+                                            <i class="fa fa-minus-circle" style="color:red"></i>
+                                            {% endif %}
+                                        </td>
                                         <td>
                                             {% if article.status == 'p' %}
                                                 <span class="badge badge-success">منتشر شده</span><br>

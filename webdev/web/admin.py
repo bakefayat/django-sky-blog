@@ -16,9 +16,9 @@ def make_draft(modeladmin, request, queryset):
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'thumb', 'author', 'slug','jpublished','status','categoryList')
+    list_display = ('title', 'thumb', 'author', 'slug','jpublished', 'is_special','status','categoryList')
     # ordering = ['title', 'published']
-    list_filter = ['category']
+    list_filter = ['category', 'is_special']
     prepopulated_fields = {'slug': ('title',)}
     actions = [make_published, make_draft]
     # def categoryList(self, obj):
