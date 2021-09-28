@@ -9,7 +9,12 @@ home page
         <div class="card mb-4">
             <a href="{% url 'blog:single' article.slug %}"><img class="card-img-top" src="{{ article.image.url }}"  alt="{{ article.slug}}" style='height:300px;' /></a>
             <div class="card-body">
-                <div class="small text-muted">{{ article.jpublished }}</div>
+                <div class="small text-muted">
+                    {% if article.is_special %}
+                        <span class="badge" style="background-color: #a21515;">مقاله ویژه</span><br>
+                    {% endif %}
+                    {{ article.jpublished }}
+                </div>
                 <a href="{% url 'blog:single' article.slug %}">
                     <h2 class="card-title">
                         {{ article.title }}
