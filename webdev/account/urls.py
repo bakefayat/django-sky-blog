@@ -5,10 +5,10 @@
 
 from django.contrib.auth import views
 from django.urls import path
-from .views import Home, ArticleList, CreateArticle, UpdateArticle, DeleteArticle, PreviewArticle, UpdateProfile
+from .views import Home, ArticleList, CreateArticle, UpdateArticle, DeleteArticle, PreviewArticle, UpdateProfile, Login
 app_name = 'account'
 urlpatterns = [
-    path('login/', views.LoginView.as_view(), name='login'),
+    path('login/', Login.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
 
     # path('password_change/', views.PasswordChangeView.as_view(), name='password_change'),

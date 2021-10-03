@@ -1,13 +1,22 @@
 from django.http import request
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, render
-from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from web.models import Blog
 from .models import User
 from .forms import ProfileForm
 from .mixins import DeleteArticleMixin, FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin
+
+
+class Login(LoginView):
+    def get_success_url(self):
+        if self.request.user.is_superuser or self.request.user.is_staff or self.request.user.is_author:
+            return reverse_lazy('account:list')
+        else:
+            return reverse_lazy('account:profile')
 
 class Home(LoginRequiredMixin, TemplateView):
     template_name = 'registration/admin.html'
