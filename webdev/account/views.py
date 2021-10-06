@@ -8,7 +8,7 @@ from django.views.generic import TemplateView, CreateView, DetailView, UpdateVie
 from web.models import Blog
 from .models import User
 from .forms import ProfileForm
-from .mixins import DeleteArticleMixin, FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin
+from .mixins import DeleteArticleMixin, FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin, AuthorsMixin
 
 
 class Login(LoginView):
@@ -18,11 +18,12 @@ class Login(LoginView):
         else:
             return reverse_lazy('account:profile')
 
-class Home(LoginRequiredMixin, TemplateView):
+
+class Home(AuthorsMixin, LoginRequiredMixin, TemplateView):
     template_name = 'registration/admin.html'
 
 
-class ArticleList(LoginRequiredMixin, ListView):
+class ArticleList(AuthorsMixin, LoginRequiredMixin, ListView):
     template_name = 'registration/articleList.html'
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -31,17 +32,17 @@ class ArticleList(LoginRequiredMixin, ListView):
             return Blog.objects.filter(author=self.request.user)
 
 
-class CreateArticle(LoginRequiredMixin, FormValidMixin, FieldsMixin, CreateView):
+class CreateArticle(AuthorsMixin, LoginRequiredMixin, FormValidMixin, FieldsMixin, CreateView):
     model = Blog
     template_name = 'registration/articleCreate.html'
 
 
-class UpdateArticle(DraftEditMixin, LoginRequiredMixin, UpdateAccessMixin, FormValidMixin, FieldsMixin, UpdateView):
+class UpdateArticle(AuthorsMixin, DraftEditMixin, LoginRequiredMixin, UpdateAccessMixin, FormValidMixin, FieldsMixin, UpdateView):
     model = Blog
     template_name = 'registration/articleUpdate.html'
 
 
-class DeleteArticle(DeleteArticleMixin, DeleteView):
+class DeleteArticle(AuthorsMixin, DeleteArticleMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('account:list')
     template_name = 'registration/articleDelete.html'

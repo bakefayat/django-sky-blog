@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from web.models import Blog
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
@@ -68,3 +68,11 @@ class PreviewMixin:
         else:
             raise Http404("you can't access this.")
 
+
+class AuthorsMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser\
+        or request.user.is_staff:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect("account:profile")
