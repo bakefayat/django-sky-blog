@@ -34,8 +34,20 @@
                         </div>
                         <div class="col-md-6">
                             {{ form.status|as_crispy_field }}
-
                         </div>
+                        {% else %}
+                            <div>
+                                <div>
+                                    <label for="id_status"> وضعیت* </label>
+                                    <div>
+                                        <select name="status" required="">
+                                            <option selected="selected" value="">---------</option>
+                                            <option value="d">پیش نویس</option>
+                                            <option value="p">انتشار</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>     
                         {% endif %}
                     </div>
                     <button class="btn btn-primary">ثبت</form>
