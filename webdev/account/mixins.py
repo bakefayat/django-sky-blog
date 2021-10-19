@@ -3,16 +3,11 @@ from django.shortcuts import get_object_or_404, redirect
 from web.models import Blog
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
+        self.fields = [
+            'title' , 'slug' , 'status', 'description' , 'image' , 'category', 'is_special', 'published'
+        ]
         if request.user.is_superuser or request.user.is_staff:
-            self.fields = [
-                'title' , 'slug' , 'author' , 'description' , 'image' , 'is_special', 'published' , 'status' , 'category'
-            ]
-        elif request.user.is_author:
-            self.fields = [
-                'title' , 'slug' , 'description' , 'image' , 'category', 'is_special', 'published'
-            ]
-        else:
-            raise Http404('no permision')
+            self.fields.append('author')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -23,7 +18,8 @@ class FormValidMixin():
         else:
             self.obj = form.save(commit=False)
             self.obj.author = self.request.user
-            self.obj.status = 'w'
+            if not self.obj.status == 'w':
+                self.obj.status = 'd'
         return super().form_valid(form)
 
 

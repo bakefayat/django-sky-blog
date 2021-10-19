@@ -2,7 +2,7 @@ from django.http import request
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from web.models import Blog
@@ -68,3 +68,7 @@ class UpdateProfile(LoginRequiredMixin, UpdateView):
     template_name = 'registration/profileUpdate.html'
     success_url = reverse_lazy('account:profile')
     form_class = ProfileForm
+
+
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy('account:password_change_done')

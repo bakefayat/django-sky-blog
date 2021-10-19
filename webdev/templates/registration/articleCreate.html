@@ -17,39 +17,41 @@
                             {{ form.description|as_crispy_field }}
                         </div>
                         <div class="col-md-6">
+                            {{ form.category|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
                             {{ form.image|as_crispy_field }}
                         </div>
                         <div class="col-md-6">
                             {{ form.published|as_crispy_field }}
                         </div>
-                        <div class="col-md-6">
-                            {{ form.category|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6 pt-2">
-                            {{ form.is_special|as_crispy_field }}
-                        </div>
                         {% if user.is_superuser %}
-                        <div class="col-md-6">
-                            {{ form.author|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.status|as_crispy_field }}
-                        </div>
+                            <div class="col-md-6">
+                                {{ form.author|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.status|as_crispy_field }}
+                            </div>
                         {% else %}
-                            <div>
-                                <div>
-                                    <label for="id_status"> وضعیت* </label>
-                                    <div>
-                                        <select name="status" required="">
-                                            <option selected="selected" value="">---------</option>
-                                            <option value="d">پیش نویس</option>
-                                            <option value="p">انتشار</option>
+                        <div class="col-6">
+                            <div id="div_id_status" class="form-group">
+                                   <label for="id_status" class=" requiredField">
+                                   وضعیت<span class="asteriskField">*</span>
+                                   </label>
+                                   <div class="">
+                                        <select name="status" class="select form-control" required="" id="id_status">
+                                               <option value="">---------</option>
+                                               <option value="d">پیش‌نویس</option>
+                                               <option value="w">ارسال برای ادمین</option>
                                         </select>
-                                    </div>
-                                </div>
-                            </div>     
-                        {% endif %}
+                                   </div>
+                            </div>
+                       </div>
+                    {% endif %}
+                    <div class="col-md-6">
+                        {{ form.is_special|as_crispy_field }}
                     </div>
+                    </div>    
                     <button class="btn btn-primary">ثبت</form>
         </form>
     </div>
