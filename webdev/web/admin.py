@@ -13,6 +13,10 @@ def make_draft(modeladmin, request, queryset):
         queryset.update(status='d')
         modeladmin.message_user(request, 'با موفقیت پیش نویس شد', messages.SUCCESS)
 
+@admin.action(description='ویژه سازی مقاله')
+def make_special(modeladmin, request, queryset):
+    queryset.update(is_special=True)
+    modeladmin.message_user(request, 'با موفقیت ویژه شد', messages.SUCCESS)
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
@@ -20,7 +24,7 @@ class BlogAdmin(admin.ModelAdmin):
     # ordering = ['title', 'published']
     list_filter = ['category', 'is_special']
     prepopulated_fields = {'slug': ('title',)}
-    actions = [make_published, make_draft]
+    actions = [make_published, make_draft, make_special]
     # def categoryList(self, obj):
     #     return('، '.join([category.title for category in obj.category.all()]))
 
