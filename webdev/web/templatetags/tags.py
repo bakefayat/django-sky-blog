@@ -17,7 +17,7 @@ def active(request, content, url_name, fa ):
         'request': request,
         'content': content,
         'url_name': url_name,
-        'url': f'account:{url_name}',
+        'url': url_name,
         'fa': fa,
     }
     return context

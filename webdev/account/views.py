@@ -68,7 +68,3 @@ class UpdateProfile(LoginRequiredMixin, UpdateView):
     template_name = 'registration/profileUpdate.html'
     success_url = reverse_lazy('account:profile')
     form_class = ProfileForm
-
-
-class PasswordChange(PasswordChangeView):
-    success_url = reverse_lazy('account:password_change_done')

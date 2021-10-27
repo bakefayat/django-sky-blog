@@ -16,13 +16,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 LOGIN_REDIRECT_URL = 'account:home'
-LOGIN_URL = 'account:login'
-LOGOUT_REDIRECT_URL = 'account:login'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '@a@1d3_9^kme5ap6^+0=m&cpo3zzl19!)czws8$l!^+5_c&jhj'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

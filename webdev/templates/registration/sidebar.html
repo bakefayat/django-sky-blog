@@ -36,11 +36,11 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    {% active request 'لیست مقالات' 'list' 'fa-list' %}
-                    {% active request 'مقاله جدید' 'create' 'fa-pen' %}
+                    {% active request 'لیست مقالات' 'account:list' 'fa-list' %}
+                    {% active request 'مقاله جدید' 'account:create' 'fa-pen' %}
                 </ul>
               {% endif %}
-              {% active request 'پروفایل' 'profile' 'fa-user' %}
+              {% active request 'پروفایل' 'account:profile' 'fa-user' %}
               {% active request 'تغییر گذرواژه' 'password_change' 'fa-user-edit' %}
 
             </li>
