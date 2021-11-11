@@ -7,18 +7,20 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0002_user_is_author'),
+        ("account", "0002_user_is_author"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='special_user',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='ویژه تا'),
+            model_name="user",
+            name="special_user",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="ویژه تا"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='is_author',
-            field=models.BooleanField(default=False, verbose_name='نویسنده'),
+            model_name="user",
+            name="is_author",
+            field=models.BooleanField(default=False, verbose_name="نویسنده"),
         ),
     ]

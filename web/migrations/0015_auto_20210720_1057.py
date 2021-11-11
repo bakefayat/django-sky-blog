@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('web', '0014_blog_category'),
+        ("web", "0014_blog_category"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='category',
-            name='position',
-            field=models.IntegerField(default='0', verbose_name='جایگاه'),
+            model_name="category",
+            name="position",
+            field=models.IntegerField(default="0", verbose_name="جایگاه"),
         ),
         migrations.AlterField(
-            model_name='blog',
-            name='category',
-            field=models.ManyToManyField(to='web.Category', verbose_name='دسته بندی'),
+            model_name="blog",
+            name="category",
+            field=models.ManyToManyField(to="web.Category", verbose_name="دسته بندی"),
         ),
     ]

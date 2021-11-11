@@ -6,17 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('web', '0003_auto_20210315_1842'),
+        ("web", "0003_auto_20210315_1842"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='GetCode',
+            name="GetCode",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('username', models.CharField(max_length=50)),
-                ('time', models.DateField()),
-                ('code', models.CharField(max_length=6)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("username", models.CharField(max_length=50)),
+                ("time", models.DateField()),
+                ("code", models.CharField(max_length=6)),
             ],
         ),
     ]

@@ -5,16 +5,26 @@
 
 from django.contrib.auth import views
 from django.urls import path
-from .views import ArticleList, CreateArticle, UpdateArticle, DeleteArticle, PreviewArticle, UpdateProfile
+from .views import (
+    ArticleList,
+    CreateArticle,
+    UpdateArticle,
+    DeleteArticle,
+    PreviewArticle,
+    UpdateProfile,
+)
 from django.views.generic import TemplateView
-app_name = 'account'
+
+app_name = "account"
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name = 'registration/admin.html'), name='home'),
-    path('articles/', ArticleList.as_view(), name='list'),
-    path('articles/create/', CreateArticle.as_view(), name='create'),
-    path('articles/upadte/<int:pk>/', UpdateArticle.as_view(), name='update'),
-    path('articles/delete/<int:pk>/', DeleteArticle.as_view(), name='delete'),
-    path('articles/preview/<str:slug>/', PreviewArticle.as_view(), name='preview'),
-    path('profile/', UpdateProfile.as_view(), name='profile'),
+    path(
+        "", TemplateView.as_view(template_name="registration/admin.html"), name="home"
+    ),
+    path("articles/", ArticleList.as_view(), name="list"),
+    path("articles/create/", CreateArticle.as_view(), name="create"),
+    path("articles/upadte/<int:pk>/", UpdateArticle.as_view(), name="update"),
+    path("articles/delete/<int:pk>/", DeleteArticle.as_view(), name="delete"),
+    path("articles/preview/<str:slug>/", PreviewArticle.as_view(), name="preview"),
+    path("profile/", UpdateProfile.as_view(), name="profile"),
 ]

@@ -6,17 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('web', '0015_auto_20210720_1057'),
+        ("web", "0015_auto_20210720_1057"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'ordering': ['position'], 'verbose_name': 'دسته بندی', 'verbose_name_plural': 'دسته بندی ها'},
+            name="category",
+            options={
+                "ordering": ["position"],
+                "verbose_name": "دسته بندی",
+                "verbose_name_plural": "دسته بندی ها",
+            },
         ),
         migrations.AddField(
-            model_name='category',
-            name='display',
-            field=models.BooleanField(default=True, verbose_name='نمایش'),
+            model_name="category",
+            name="display",
+            field=models.BooleanField(default=True, verbose_name="نمایش"),
         ),
     ]

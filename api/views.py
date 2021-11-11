@@ -1,10 +1,21 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from rest_framework.generics import ListAPIView,ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 from rest_framework.viewsets import ModelViewSet
+
 # from .serializers import ProductsSerializer, UserSerializer, CategorySerializer
-from .permissions import IsSuperUser, IsStaffOrReadOnly, IsAuthorOrReadOnly, StaffReadOnlyOrSuperUser
+from .permissions import (
+    IsSuperUser,
+    IsStaffOrReadOnly,
+    IsAuthorOrReadOnly,
+    StaffReadOnlyOrSuperUser,
+)
+
 # from web.models import Product, Category
 
 # class ProductViewSet(ModelViewSet):
