@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "web.apps.WebConfig",
-    "api",
     "account.apps.AccountConfig",
     "extentions",
     "widget_tweaks",
