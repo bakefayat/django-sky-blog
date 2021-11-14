@@ -1,0 +1,26 @@
+@font-face {
+    font-family: Tanha;
+    src: url('../fonts/Tanha.eot');
+    src: url('../fonts/Tanha.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Tanha.woff') format('woff'),
+         url('../fonts/Tanha.ttf') format('truetype');
+    font-weight: normal;
+}
+
+body{
+    font-family: Tanha !important
+}
+.my_font,  .focus-input100::after{
+    font-family: 'Tanha' !important;
+}
+.btn-show-pass{
+    right: initial;
+    left: 0;
+}
+li.nav-item.has-treeview.menu-open {
+    display: block;
+    text-align: right;
+  }
+  a.brand-link{
+      text-align: right;
+  }
