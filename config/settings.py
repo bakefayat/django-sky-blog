@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "web.apps.WebConfig",
     "account.apps.AccountConfig",
+    "exception_handling.apps.ExceptionHandlingConfig",
     "extentions",
     "widget_tweaks",
     "crispy_forms",
