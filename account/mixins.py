@@ -1,7 +1,11 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from web.models import Blog
-
+from extentions.utils import(
+    check_author_staff_superuser, 
+    check_staff_superuser,
+    check_owner_staff_superuser,
+    )
 
 class FieldsMixin:
     def dispatch(self, request, *args, **kwargs):
@@ -15,14 +19,14 @@ class FieldsMixin:
             "is_special",
             "published",
         ]
-        if request.user.is_superuser or request.user.is_staff:
+        if check_staff_superuser(request):
             self.fields.append("author")
         return super().dispatch(request, *args, **kwargs)
 
 
 class FormValidMixin:
     def form_valid(self, form):
-        if self.request.user.is_superuser or self.request.user.is_staff:
+        if check_staff_superuser(self.request):
             form.save()
         else:
             self.obj = form.save(commit=False)
@@ -35,14 +39,9 @@ class FormValidMixin:
 class UpdateAccessMixin:
     def dispatch(self, request, pk, *args, **kwargs):
         article = get_object_or_404(Blog, pk=pk)
-        if (
-            request.user.is_superuser
-            or request.user.is_staff
-            or request.user == article.author
-        ):
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            raise Http404("you can't access this.")
+        check_owner_staff_superuser(self.request, article)
+        return super().dispatch(request, *args, **kwargs)
+
 
 
 class DraftEditMixin:
@@ -57,33 +56,20 @@ class DraftEditMixin:
 class DeleteArticleMixin:
     def dispatch(self, request, pk, *args, **kwargs):
         article = get_object_or_404(Blog, pk=pk)
-        if (
-            request.user.is_superuser
-            or request.user.is_staff
-            or request.user.is_author
-            and article.author == request.user
-        ):
-            return super().dispatch(request, pk, *args, **kwargs)
-        else:
-            raise Http404("you have no permision to delete this article.")
+        check_owner_staff_superuser(request, article)
+        return super().dispatch(request, pk, *args, **kwargs)
 
 
 class PreviewMixin:
     def dispatch(self, request, slug, *args, **kwargs):
         article = get_object_or_404(Blog, slug=slug)
-        if (
-            request.user.is_superuser
-            or request.user.is_staff
-            or request.user == article.author
-        ):
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            raise Http404("you can't access this.")
+        check_owner_staff_superuser(self.request, article)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class AuthorsMixin:
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_superuser or request.user.is_staff or request.user.is_author:
+        if check_author_staff_superuser(self.request):
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect("account:profile")
