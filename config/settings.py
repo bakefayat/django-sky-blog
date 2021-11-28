@@ -44,12 +44,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "widget_tweaks",
+    "crispy_forms",
+    "debug_toolbar",
     "web.apps.WebConfig",
     "account.apps.AccountConfig",
     "exception_handling.apps.ExceptionHandlingConfig",
     "extentions",
-    "widget_tweaks",
-    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -140,3 +142,8 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "account.User"
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
