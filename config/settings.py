@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "web.apps.WebConfig",
     "account.apps.AccountConfig",
     "exception_handling.apps.ExceptionHandlingConfig",
+    "core.apps.CoreConfig",
     "extentions",
 ]
 

@@ -39,7 +39,7 @@ class FormValidMixin:
 class UpdateAccessMixin:
     def dispatch(self, request, pk, *args, **kwargs):
         article = get_object_or_404(Blog, pk=pk)
-        check_owner_staff_superuser(self.request, article)
+        check_owner_staff_superuser(request, article)
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -63,13 +63,13 @@ class DeleteArticleMixin:
 class PreviewMixin:
     def dispatch(self, request, slug, *args, **kwargs):
         article = get_object_or_404(Blog, slug=slug)
-        check_owner_staff_superuser(self.request, article)
+        check_owner_staff_superuser(request, article)
         return super().dispatch(request, *args, **kwargs)
 
 
 class AuthorsMixin:
     def dispatch(self, request, *args, **kwargs):
-        if check_author_staff_superuser(self.request):
+        if check_author_staff_superuser(request):
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect("account:profile")

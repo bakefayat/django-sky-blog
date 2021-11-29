@@ -1,11 +1,10 @@
 from django.db import models
-from account.models import User
-from django.db.models.deletion import SET_NULL
 from django.utils import timezone
 from django.utils.html import format_html
-from extentions.utils import to_jalali
 from django.urls import reverse
-
+from extentions.utils import to_jalali
+from account.models import User
+from core.models import TimeStampedModel
 
 class PublishedArticle(models.Manager):
     def published(self):
@@ -48,7 +47,7 @@ class Category(models.Model):
     objects = ShownCategory()
 
 
-class Blog(models.Model):
+class Blog(TimeStampedModel):
     class Meta:
         verbose_name = "مقاله"
         verbose_name_plural = "مقالات"
@@ -77,8 +76,6 @@ class Blog(models.Model):
     description = models.TextField(max_length=1000, verbose_name="توضیحات")
     image = models.ImageField(upload_to="images", verbose_name="تصویر شاخص")
     published = models.DateTimeField(default=timezone.now, verbose_name="تاریخ انتشار")
-    created = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ساخت")
-    updated = models.DateTimeField(auto_now=True, verbose_name="آخرین بروزرسانی")
     is_special = models.BooleanField(
         verbose_name="مقاله ویژه",
         default=False,
