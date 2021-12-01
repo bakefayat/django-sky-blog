@@ -38,11 +38,11 @@ class Login(LoginView):
             return reverse_lazy("account:profile")
 
 
-class Home(AuthorsMixin, LoginRequiredMixin, TemplateView):
+class Home(LoginRequiredMixin, AuthorsMixin, TemplateView):
     template_name = "registration/admin.html"
 
 
-class ArticleList(AuthorsMixin, LoginRequiredMixin, ListView):
+class ArticleList(LoginRequiredMixin, AuthorsMixin, ListView):
     template_name = "registration/articleList.html"
 
     def get_queryset(self):
@@ -53,16 +53,16 @@ class ArticleList(AuthorsMixin, LoginRequiredMixin, ListView):
 
 
 class CreateArticle(
-    AuthorsMixin, LoginRequiredMixin, FormValidMixin, FieldsMixin, CreateView
+    LoginRequiredMixin, AuthorsMixin, FormValidMixin, FieldsMixin, CreateView
 ):
     model = Blog
     template_name = "registration/articleCreate.html"
 
 
 class UpdateArticle(
+    LoginRequiredMixin,
     AuthorsMixin,
     DraftEditMixin,
-    LoginRequiredMixin,
     UpdateAccessMixin,
     FormValidMixin,
     FieldsMixin,
@@ -72,7 +72,7 @@ class UpdateArticle(
     template_name = "registration/articleUpdate.html"
 
 
-class DeleteArticle(AuthorsMixin, DeleteArticleMixin, DeleteView):
+class DeleteArticle(LoginRequiredMixin, AuthorsMixin, DeleteArticleMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy("account:list")
     template_name = "registration/articleDelete.html"
