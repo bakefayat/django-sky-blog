@@ -99,7 +99,7 @@ class Blog(TimeStampedModel):
         )
 
     def get_absolute_url(self):
-        return reverse("account:list")
+        return reverse("account:detail", kwargs={"slug": self.slug})
 
     objects = PublishedArticle()
 

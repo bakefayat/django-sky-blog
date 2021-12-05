@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 from web.models import Blog
 from extentions.utils import(
     check_author_staff_superuser, 
@@ -73,3 +74,14 @@ class AuthorsMixin:
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect("account:profile")
+
+
+class ArticleActionMixin:
+    @property
+    def success_message(self):
+        return NotImplemented
+
+    
+    def form_valid(self, form):
+        messages.info(self.request, self.success_message)
+        return super().form_valid(form)

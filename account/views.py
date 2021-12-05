@@ -23,6 +23,7 @@ from .mixins import (
     DeleteArticleMixin,
     PreviewMixin,
     AuthorsMixin,
+    ArticleActionMixin
 )
 
 
@@ -53,14 +54,16 @@ class ArticleList(LoginRequiredMixin, AuthorsMixin, ListView):
 
 
 class CreateArticle(
-    LoginRequiredMixin, AuthorsMixin, FormValidMixin, FieldsMixin, CreateView
+    LoginRequiredMixin, ArticleActionMixin, AuthorsMixin, FormValidMixin, FieldsMixin, CreateView
 ):
     model = Blog
     template_name = "registration/articleCreate.html"
+    success_message = "مقاله با موفقیت ساخته شد."
 
 
 class UpdateArticle(
     LoginRequiredMixin,
+    ArticleActionMixin,
     AuthorsMixin,
     DraftEditMixin,
     UpdateAccessMixin,
@@ -70,6 +73,13 @@ class UpdateArticle(
 ):
     model = Blog
     template_name = "registration/articleUpdate.html"
+    success_message = "با موفقیت بروزرسانی شد."
+
+
+# show updated or created successfully message
+class ArticleDetailView(ArticleActionMixin, DetailView):
+    model = Blog
+    template_name = "registration/article_detail.html"
 
 
 class DeleteArticle(LoginRequiredMixin, AuthorsMixin, DeleteArticleMixin, DeleteView):

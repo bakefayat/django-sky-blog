@@ -13,6 +13,7 @@ from .views import (
     DeleteArticle,
     PreviewArticle,
     UpdateProfile,
+    ArticleDetailView,
 )
 from django.views.generic import TemplateView
 
@@ -25,5 +26,6 @@ urlpatterns = [
     path("articles/upadte/<int:pk>/", UpdateArticle.as_view(), name="update"),
     path("articles/delete/<int:pk>/", DeleteArticle.as_view(), name="delete"),
     path("articles/preview/<str:slug>/", PreviewArticle.as_view(), name="preview"),
+    path("articles/detail/<str:slug>/", ArticleDetailView.as_view(), name="detail"),
     path("profile/", UpdateProfile.as_view(), name="profile"),
 ]
