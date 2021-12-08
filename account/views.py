@@ -39,11 +39,11 @@ class Login(LoginView):
             return reverse_lazy("account:profile")
 
 
-class Home(LoginRequiredMixin, AuthorsMixin, TemplateView):
+class HomeView(LoginRequiredMixin, AuthorsMixin, TemplateView):
     template_name = "registration/admin.html"
 
 
-class ArticleList(LoginRequiredMixin, AuthorsMixin, ListView):
+class ArticleListView(LoginRequiredMixin, AuthorsMixin, ListView):
     template_name = "registration/articleList.html"
 
     def get_queryset(self):
@@ -53,7 +53,7 @@ class ArticleList(LoginRequiredMixin, AuthorsMixin, ListView):
             return Blog.objects.filter(author=self.request.user)
 
 
-class CreateArticle(
+class ArticleCreateView(
     LoginRequiredMixin, ArticleActionMixin, AuthorsMixin, FormValidMixin, FieldsMixin, CreateView
 ):
     model = Blog
@@ -61,7 +61,7 @@ class CreateArticle(
     success_message = "مقاله با موفقیت ساخته شد."
 
 
-class UpdateArticle(
+class ArticleUpdateView(
     LoginRequiredMixin,
     ArticleActionMixin,
     AuthorsMixin,
@@ -82,13 +82,13 @@ class ArticleDetailView(ArticleActionMixin, DetailView):
     template_name = "registration/article_detail.html"
 
 
-class DeleteArticle(LoginRequiredMixin, AuthorsMixin, DeleteArticleMixin, DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, AuthorsMixin, DeleteArticleMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy("account:list")
     template_name = "registration/articleDelete.html"
 
 
-class PreviewArticle(PreviewMixin, DetailView):
+class ArticlePreviewView(PreviewMixin, DetailView):
     def get_object(self):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog, slug=slug)
@@ -96,7 +96,7 @@ class PreviewArticle(PreviewMixin, DetailView):
     template_name = "blog/articleDetail.html"
 
 
-class UpdateProfile(LoginRequiredMixin, UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
@@ -122,7 +122,7 @@ from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 
 
-class Register(CreateView):
+class RegisterCreateView(CreateView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user.is_active = False

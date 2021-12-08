@@ -5,13 +5,13 @@ from .models import Blog, Category
 from account.models import User
 
 
-class ArticleList(ListView):
+class ArticleListView(ListView):
     queryset = Blog.objects.published()
     template_name = "blog/articleList.html"
     paginate_by = 2
 
 
-class ArticleDetail(DetailView):
+class ArticleDetailView(DetailView):
     def get_object(self):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog.objects.published(), slug=slug)
@@ -19,7 +19,7 @@ class ArticleDetail(DetailView):
     template_name = "blog/articleDetail.html"
 
 
-class CategoryList(ListView):
+class CategoryListView(ListView):
     def get_queryset(self):
         global category
         slug = self.kwargs.get("slug")
@@ -35,7 +35,7 @@ class CategoryList(ListView):
     paginate_by = 2
 
 
-class UserList(ListView):
+class UserListView(ListView):
     def get_queryset(self):
         global user
         username = self.kwargs.get("slug")

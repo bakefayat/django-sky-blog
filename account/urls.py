@@ -6,13 +6,13 @@
 from django.contrib.auth import views
 from django.urls import path
 from .views import (
-    Home,
-    ArticleList,
-    CreateArticle,
-    UpdateArticle,
-    DeleteArticle,
-    PreviewArticle,
-    UpdateProfile,
+    HomeView,
+    ArticleListView,
+    ArticleCreateView,
+    ArticleUpdateView,
+    ArticleDeleteView,
+    ArticlePreviewView,
+    ProfileUpdateView,
     ArticleDetailView,
 )
 from django.views.generic import TemplateView
@@ -20,12 +20,12 @@ from django.views.generic import TemplateView
 app_name = "account"
 
 urlpatterns = [
-    path("", Home.as_view(), name="home"),
-    path("articles/", ArticleList.as_view(), name="list"),
-    path("articles/create/", CreateArticle.as_view(), name="create"),
-    path("articles/upadte/<int:pk>/", UpdateArticle.as_view(), name="update"),
-    path("articles/delete/<int:pk>/", DeleteArticle.as_view(), name="delete"),
-    path("articles/preview/<str:slug>/", PreviewArticle.as_view(), name="preview"),
+    path("", HomeView.as_view(), name="home"),
+    path("articles/", ArticleListView.as_view(), name="list"),
+    path("articles/create/", ArticleCreateView.as_view(), name="create"),
+    path("articles/update/<int:pk>/", ArticleUpdateView.as_view(), name="update"),
+    path("articles/delete/<int:pk>/", ArticleDeleteView.as_view(), name="delete"),
+    path("articles/preview/<str:slug>/", ArticlePreviewView.as_view(), name="preview"),
     path("articles/detail/<str:slug>/", ArticleDetailView.as_view(), name="detail"),
-    path("profile/", UpdateProfile.as_view(), name="profile"),
+    path("profile/", ProfileUpdateView.as_view(), name="profile"),
 ]
