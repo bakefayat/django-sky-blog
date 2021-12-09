@@ -19,9 +19,6 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'blog:index' %}">وبلاگ جنگویی</a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        {% navbar_cat %}
-                    </ul>
             </div>
         </nav>
         <!-- Page header with logo and tagline-->
@@ -45,33 +42,24 @@
                 <div class="col-lg-4">
                     <!-- Search widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Search</div>
+                        <div class="card-header">جستجو</div>
                         <div class="card-body">
                             <form method="GET" action="{% url 'blog:search' %}">
                               <div class="input-group">
-                                <input class="form-control" type="text" name="q" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                                <input class="form-control" type="text" name="q" placeholder="قسمتی از عنوان مقاله..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="submit">یافتن!</button>
                               </div>
                             </form>
                         </div>
                     </div>
                     <!-- Categories widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Categories</div>
+                        <div class="card-header">دسته بندی ها</div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
+                                        {% navbar_cat %}
                                     </ul>
                                 </div>
                             </div>
