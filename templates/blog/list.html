@@ -43,6 +43,8 @@ home page
                 {% endfor %}
             </div>
         </div>
+    {% empty %}
+    <h1>مقاله ای موجود نیست.</h1>
     {% endfor %}
     {% if page_obj.has_next %}
         <a href="{% block next_page %}{% endblock %}">مقالات قدیمی تر</a>

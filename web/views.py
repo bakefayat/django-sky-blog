@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models.base import Model
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_list_or_404, render, get_object_or_404
 from .models import Blog, Category
@@ -9,6 +10,26 @@ class ArticleListView(ListView):
     queryset = Blog.objects.published()
     template_name = "blog/articleList.html"
     paginate_by = 2
+    
+
+class SearchListView(ListView):
+    model = Blog
+    template_name = "blog/searchList.html"
+    paginate_by = 2
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            queryset = queryset.filter(title__icontains=q, status="p")
+        else:
+            queryset = Blog.objects.published()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
 
 
 class ArticleDetailView(DetailView):

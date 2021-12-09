@@ -1,11 +1,14 @@
 from django.urls import path
 from . import views
-from .views import ArticleListView, ArticleDetailView, CategoryListView, UserListView
+from .views import ArticleListView, ArticleDetailView, CategoryListView, UserListView, SearchListView
 
 app_name = "blog"
 urlpatterns = [
     path("", ArticleListView.as_view(), name="index"),
     path("page/<int:page>/", ArticleListView.as_view(), name="index"),
+    path("search/", SearchListView.as_view(), name="search"),
+    path("search/<int:page>/", SearchListView.as_view(), name="search"),
+    path("", ArticleListView.as_view(), name="index"),
     path("<str:slug>/", ArticleDetailView.as_view(), name="single"),
     path("category/<str:slug>/", CategoryListView.as_view(), name="category"),
     path(
