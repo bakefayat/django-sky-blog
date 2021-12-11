@@ -12,7 +12,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name="ایمیل")
 
     def is_specialuser(self):
-        if self.special_user > timezone.now():
+        if self.special_user > timezone.now() or self.is_superuser:
             return True
         return False
 

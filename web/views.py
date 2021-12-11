@@ -1,20 +1,18 @@
-from django.core.paginator import Paginator
-from django.db.models.base import Model
 from django.views.generic import ListView, DetailView
-from django.shortcuts import get_list_or_404, render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from .models import Blog, Category
 from account.models import User
 
 
 class ArticleListView(ListView):
     queryset = Blog.objects.published()
-    template_name = "blog/articleList.html"
+    template_name = "blog/article_list.html"
     paginate_by = 2
     
 
 class SearchListView(ListView):
     model = Blog
-    template_name = "blog/searchList.html"
+    template_name = "blog/search_list.html"
     paginate_by = 2
 
     def get_queryset(self):
@@ -37,7 +35,7 @@ class ArticleDetailView(DetailView):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog.objects.published(), slug=slug)
 
-    template_name = "blog/articleDetail.html"
+    template_name = "blog/article_detail.html"
 
 
 class CategoryListView(ListView):
@@ -52,7 +50,7 @@ class CategoryListView(ListView):
         context["category"] = category
         return context
 
-    template_name = "blog/categoryList.html"
+    template_name = "blog/category_list.html"
     paginate_by = 2
 
 
@@ -68,5 +66,5 @@ class UserListView(ListView):
         context["user"] = user
         return context
 
-    template_name = "blog/userList.html"
+    template_name = "blog/user_list.html"
     paginate_by = 2

@@ -1,14 +1,18 @@
-{% extends 'blog/list.html' %}
+{% extends 'blog/base_list.html' %}
 {% load tags %}
+
 {% block head_title %}
     Search
 {% endblock %}
+
 {% block head_description %}
     جستجو برای مقالات حاوی '{{ q }}'
 {% endblock %}
+
 {% block next_page %}
     {% url 'blog:search' page_obj.next_page_number %}?q={{ q }}
 {% endblock %}
+
 {% block previous_page %}
     {% url 'blog:search' page_obj.previous_page_number %}?q={{ q }}
 {% endblock %}

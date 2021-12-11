@@ -20,17 +20,13 @@ home page
                         {{ article.title }}
                     </h2>
                 </a>
-                    <p class="card-text">
-                        {% if article.is_special %}
-                            {% if user.is_authenticated and user.is_specialuser or user.is_superuser or user.is_staff or article.author == user %}
-                                {{ article.description|safe|linebreaks|truncatewords:'20' }}
-                            {% else %}
-                                <p>شما دسترسی ندارید.</p>
-                            {% endif %}
-                        {% else %}
-                            {{ article.description|safe|linebreaks|truncatewords:'20' }}
-                        {% endif %}
-                    </p>
+                <p class="card-text">
+                    {% if not article.is_special or user.is_specialuser or article.author == user %}
+                        {{ article.description|safe|linebreaks|truncatewords:'20' }}
+                    {% else %}
+                        <p>شما دسترسی ندارید.</p>
+                    {% endif %}
+                </p>
                 <a href="{% url 'blog:user' article.author.username%}">
                     <sm>
                         نویسنده: {{ article.author.get_full_name }}
