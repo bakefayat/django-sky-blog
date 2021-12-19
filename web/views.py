@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
 from .models import Blog, Category
+from core.mixins import SearchActionMixin
 from account.models import User
 
 
@@ -10,19 +11,10 @@ class ArticleListView(ListView):
     paginate_by = 2
     
 
-class SearchListView(ListView):
+class SearchListView(SearchActionMixin, ListView):
     model = Blog
     template_name = "blog/search_list.html"
     paginate_by = 2
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        q = self.request.GET.get('q')
-        if q:
-            queryset = queryset.filter(title__icontains=q, status="p")
-        else:
-            queryset = Blog.objects.published()
-        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
