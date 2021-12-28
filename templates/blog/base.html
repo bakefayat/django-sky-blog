@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <form method="GET" action="{% url 'blog:search' %}">
                               <div class="input-group">
-                                <input class="form-control" type="text" name="q" placeholder="قسمتی از عنوان مقاله..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <input class="form-control" type="text" value="{{q}}" name="q" placeholder="قسمتی از عنوان مقاله..." aria-label="Enter search term..." aria-describedby="button-search" />
                                 <button class="btn btn-primary" id="button-search" type="submit">یافتن!</button>
                               </div>
                             </form>
