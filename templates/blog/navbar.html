@@ -1,8 +1,5 @@
 {% for category in categories %}
-    {% if category.parent == None %}
         <li>
             <a href="{% url 'blog:category' category.slug %}">{{ category.title }}</a>
         </li>
-            {% include 'blog/includes/category_navbar.html' %}
-    {% endif %}
 {% endfor %}

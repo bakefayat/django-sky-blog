@@ -6,7 +6,7 @@ from account.models import User
 
 
 class ArticleListView(ListView):
-    queryset = Blog.objects.published()
+    queryset = Blog.objects.published().select_related("author")
     template_name = "blog/article_list.html"
     paginate_by = 2
     
