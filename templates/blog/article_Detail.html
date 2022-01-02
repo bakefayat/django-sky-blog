@@ -15,7 +15,8 @@
             </div>
             
             {% if not article.is_special or user.is_specialuser or article.author == user %}
-                {{ article.description|safe|linebreaks|truncatewords:'20' }}
+            {{ object.description|safe|linebreaks }}
+
             {% else %}
                 <p>شما دسترسی ندارید.</p>
             {% endif %}
