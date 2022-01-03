@@ -1,14 +1,23 @@
 {% extends 'blog/base_list.html' %}
 {% load tags %}
+
+{% block title %}
+{{ block.super }}
+ | لیست مقالات دسته بندی {{ category.title }}
+{% endblock %}
+
 {% block head_title %}
 {{ category.title }}
 {% endblock %}
+
 {% block head_description %}
 صفحه دسته بندی {{ category.slug }} وب سایت ما اینجا می باشد.
 {% endblock %}
+
 {% block next_page %}
     {% url 'blog:category' category.slug page_obj.next_page_number %}
 {% endblock %}
+
 {% block previous_page %}
     {% url 'blog:category' category.slug  page_obj.previous_page_number %}
 {% endblock %}

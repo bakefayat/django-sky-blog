@@ -1,6 +1,11 @@
 {% extends 'blog/base_list.html' %}
 {% load tags %}
 
+{% block title %}
+{{ block.super }}
+ | مقالات حاوی {{ q }}
+{% endblock %}
+
 {% block head_title %}
     Search
 {% endblock %}
