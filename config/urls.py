@@ -22,6 +22,9 @@ import debug_toolbar
 from account.views import Login
 from account.views import RegisterCreateView, activate
 
+handler500 = 'exception_handling.views.handler500'
+handler404 = 'exception_handling.views.handler404'
+
 urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     path("register/", RegisterCreateView.as_view(), name="register"),
