@@ -1,1 +1,15 @@
-<h1>برگه پیدا نشد.</h1>
+<html>
+    <head>
+        <title>404 Page Not Found</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>404 Page Not Found</h1>
+        <p>برگه ای که دنبال آن می گشتید پیدا نشد</p>
+        <form action="{% url 'blog:search' %}" method="get">
+            <input type="text" name="q" placeholder="جستجو">
+            <input type="submit" value="جستجو">
+        </form>
+    </body>
+</html>
