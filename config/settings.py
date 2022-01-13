@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "crispy_forms",
     "debug_toolbar",
+    "rest_framework",
     "web.apps.WebConfig",
     "account.apps.AccountConfig",
     "exception_handling.apps.ExceptionHandlingConfig",
     "core.apps.CoreConfig",
+    "api.apps.ApiConfig",
     "extentions",
 ]
 
