@@ -17,3 +17,7 @@ class IsAuthorOrReadOnly(BasePermission):
             or request.user
             and obj.author == request.user
         )
+
+class IsSuperUser(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_superuser

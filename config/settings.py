@@ -153,6 +153,6 @@ INTERNAL_IPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'api.permissions.IsSuperUserOrReadOnly',
+        'api.permissions.IsSuperUser',
     ]
 }
