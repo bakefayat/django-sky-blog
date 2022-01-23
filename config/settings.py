@@ -150,3 +150,9 @@ AUTH_USER_MODEL = "account.User"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'api.permissions.IsSuperUserOrReadOnly',
+    ]
+}

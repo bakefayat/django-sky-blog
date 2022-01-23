@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 from .serializers import ArticleSerializer
+from .permissions import IsSuperUserOrReadOnly, IsAuthorOrReadOnly
 from web.models import Blog
 # Create your views here.
 
@@ -9,7 +11,11 @@ from web.models import Blog
 class ArticleListApiView(ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = (IsSuperUserOrReadOnly,)
 
 
-class SimpleView(TemplateView):
-    template_name = "registration/password_reset_done.html"
+class ArticleDetailApiView(RetrieveUpdateDestroyAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = ArticleSerializer
+    lookup_field = "slug"
+    permission_classes = (IsAuthorOrReadOnly,)
