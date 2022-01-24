@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "debug_toolbar",
     "rest_framework",
+    "rest_framework.authtoken",
     "web.apps.WebConfig",
     "account.apps.AccountConfig",
     "exception_handling.apps.ExceptionHandlingConfig",
@@ -154,5 +155,8 @@ INTERNAL_IPS = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'api.permissions.IsSuperUser',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
