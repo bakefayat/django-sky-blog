@@ -28,7 +28,8 @@ webdev/static/
 .Python
 build/
 develop-eggs/
-dist/
+# removed from gitignore because AdminPanel style doesn't work properly.
+# dist/
 downloads/
 eggs/
 .eggs/
