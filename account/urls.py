@@ -15,7 +15,6 @@ from .views import (
     ProfileUpdateView,
     ArticleDetailView,
 )
-from django.views.generic import TemplateView
 
 app_name = "account"
 
