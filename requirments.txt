@@ -1,11 +1,11 @@
 asgiref==3.4.1
 certifi==2020.12.5
-cffi==1.14.5
+cffi==1.15.0
 chardet==4.0.0
 cryptography==3.4.7
 defusedxml==0.7.1
 dj-rest-auth==2.1.4
-Django==3.2.6
+Django==4.0.2
 django-allauth==0.44.0
 django-cors-headers==3.10.0
 django-crispy-forms==1.12.0
