@@ -6,6 +6,7 @@ from extentions.utils import to_jalali
 from account.models import User
 from core.models import TimeStampedModel
 
+
 class PublishedArticle(models.Manager):
     def published(self):
         return self.filter(status="p")

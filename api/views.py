@@ -25,17 +25,18 @@ class ArticleDetailApiView(RetrieveUpdateDestroyAPIView):
 class UserListApiView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permision_classes = (IsSuperUserOrReadOnly,)
+    permission_classes = (IsSuperUserOrReadOnly,)
 
 
 class UserDetailApiView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permision_classes = (IsSuperUser,)
+    permission_classes = (IsSuperUser,)
 
 
 class RevokeTokenApiView(APIView):
     permission_classes = (IsAuthenticated,)
+
     def delete(self, request):
         request.auth.delete()
         return Response(status=204)

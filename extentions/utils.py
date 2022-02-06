@@ -8,6 +8,7 @@ from .jalali import(
     en_to_fa_numbers
 )
 
+
 def to_jalali(time):
     time = timezone.localtime(time)
     calender_to_str = datetime_to_str(time)
@@ -34,6 +35,7 @@ def check_author_staff_superuser(request: HttpRequest) -> HttpResponse:
             return True
     return False
 
+
 def check_staff_superuser(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         if (
@@ -42,6 +44,7 @@ def check_staff_superuser(request: HttpRequest) -> HttpResponse:
         ):
             return True
     return False
+
 
 def check_owner_staff_superuser(request: HttpRequest, article) -> HttpResponse:
     if request.user.is_authenticated:
@@ -52,4 +55,4 @@ def check_owner_staff_superuser(request: HttpRequest, article) -> HttpResponse:
             ):
             request.is_ok = True
             return request
-    raise(PermissionDenied)
+    raise PermissionDenied

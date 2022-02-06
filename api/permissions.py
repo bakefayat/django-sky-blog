@@ -1,5 +1,7 @@
 from rest_framework.permissions import BasePermission
 from rest_framework.permissions import SAFE_METHODS
+
+
 class IsSuperUserOrReadOnly(BasePermission):
     def has_permission(self, request, view):
         return bool(
@@ -17,6 +19,7 @@ class IsAuthorOrReadOnly(BasePermission):
             or request.user
             and obj.author == request.user
         )
+
 
 class IsSuperUser(BasePermission):
     def has_permission(self, request, view):
