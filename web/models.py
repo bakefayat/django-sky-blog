@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
 from django.urls import reverse
-from extentions.utils import to_jalali
+from extensions.utils import to_jalali
 from account.models import User
 from core.models import TimeStampedModel
 
@@ -88,7 +88,7 @@ class Blog(TimeStampedModel):
         Category, related_name="articles", verbose_name="دسته بندی"
     )
 
-    def categoryList(self):
+    def category_list(self):
         return "، ".join([i.title for i in self.category.shown()])
 
     def jpublished(self):
@@ -105,5 +105,5 @@ class Blog(TimeStampedModel):
     objects = PublishedArticle()
 
     jpublished.short_description = "زمان انتشار"
-    categoryList.short_description = "دسته بندی"
+    category_list.short_description = "دسته بندی"
     thumb.short_description = "تصویر بندانگشتی"

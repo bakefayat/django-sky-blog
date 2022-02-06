@@ -31,7 +31,7 @@ class BlogAdmin(admin.ModelAdmin):
         "jpublished",
         "is_special",
         "status",
-        "categoryList",
+        "category_list",
     )
     # ordering = ['title', 'published']
     list_filter = ["category", "is_special"]

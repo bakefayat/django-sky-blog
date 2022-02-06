@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from web.models import Blog
-from extentions.utils import(
+from extensions.utils import(
     check_author_staff_superuser, 
     check_staff_superuser,
     check_owner_staff_superuser,
