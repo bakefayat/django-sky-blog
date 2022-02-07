@@ -15,7 +15,6 @@ from web.models import Blog
 from .models import User
 from .forms import ProfileForm
 from .mixins import (
-    DeleteArticleMixin,
     FieldsMixin,
     FormValidMixin,
     UpdateAccessMixin,
@@ -28,6 +27,8 @@ from .mixins import (
 
 
 class Login(LoginView):
+    template_name = "account/login.html"
+
     def get_success_url(self):
         if (
             self.request.user.is_superuser
@@ -40,11 +41,11 @@ class Login(LoginView):
 
 
 class HomeView(LoginRequiredMixin, AuthorsMixin, TemplateView):
-    template_name = "registration/admin.html"
+    template_name = "account/admin.html"
 
 
 class ArticleListView(LoginRequiredMixin, AuthorsMixin, ListView):
-    template_name = "registration/articleList.html"
+    template_name = "account/articleList.html"
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -57,7 +58,7 @@ class ArticleCreateView(
     LoginRequiredMixin, ArticleActionMixin, AuthorsMixin, FormValidMixin, FieldsMixin, CreateView
 ):
     model = Blog
-    template_name = "registration/articleCreate.html"
+    template_name = "account/articleCreate.html"
     success_message = "مقاله با موفقیت ساخته شد."
 
 
@@ -72,20 +73,20 @@ class ArticleUpdateView(
     UpdateView,
 ):
     model = Blog
-    template_name = "registration/articleUpdate.html"
+    template_name = "account/articleUpdate.html"
     success_message = "با موفقیت بروزرسانی شد."
 
 
 # show updated or created successfully message
 class ArticleDetailView(ArticleActionMixin, DetailView):
     model = Blog
-    template_name = "registration/article_detail.html"
+    template_name = "account/article_detail.html"
 
 
 class ArticleDeleteView(LoginRequiredMixin, AuthorsMixin, DeleteArticleMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy("account:list")
-    template_name = "registration/articleDelete.html"
+    template_name = "account/articleDelete.html"
 
 
 class ArticlePreviewView(PreviewMixin, DetailView):
@@ -106,7 +107,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         return User.objects.get(pk=self.request.user.pk)
 
     model = User
-    template_name = "registration/profileUpdate.html"
+    template_name = "account/profileUpdate.html"
     success_url = reverse_lazy("account:profile")
     form_class = ProfileForm
 
@@ -130,7 +131,7 @@ class RegisterCreateView(CreateView):
         current_site = get_current_site(request)
         mail_subject = "Activate your blog account."
         message = render_to_string(
-            "registration/acc_active_email.html",
+            "account/acc_active_email.html",
             {
                 "user": user,
                 "domain": current_site.domain,
@@ -144,7 +145,7 @@ class RegisterCreateView(CreateView):
         return redirect("register-pending")
 
     form_class = SignupForm
-    template_name = "registration/register_form.html"
+    template_name = "account/register_form.html"
 
 
 def activate(request, uidb64, token):

@@ -16,12 +16,12 @@ urlpatterns = [
     # TODO: this way of using CBVs is not good at all.
     path(
         "register/pending/",
-        TemplateView.as_view(template_name="registration/register_done.html"),
+        TemplateView.as_view(template_name="account/register_done.html"),
         name="register-pending",
     ),
     path(
         "register/complete/",
-        TemplateView.as_view(template_name="registration/register_complete.html"),
+        TemplateView.as_view(template_name="account/register_complete.html"),
         name="register-complete",
     ),
     path("activate/<str:uidb64>/<str:token>/", activate, name="activate"),

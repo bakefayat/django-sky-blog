@@ -10,7 +10,7 @@ def navbar_cat():
     return cat
 
 
-@register.inclusion_tag("registration/active.html")
+@register.inclusion_tag("account/active.html")
 def active(request, content, url_name, fa):
     context = {
         "request": request,
