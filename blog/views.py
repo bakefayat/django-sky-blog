@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
 from .models import Blog, Category
 from core.mixins import SearchActionMixin
-from account.models import User
+from accounts.models import User
 
 
 class ArticleListView(ListView):

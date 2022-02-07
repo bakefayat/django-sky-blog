@@ -16,7 +16,7 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-LOGIN_REDIRECT_URL = "account:home"
+LOGIN_REDIRECT_URL = "accounts:home"
 LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "login"
 # Quick-start development settings - unsuitable for production
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "blog.apps.WebConfig",
-    "account.apps.AccountConfig",
+    "accounts.apps.AccountConfig",
     "exception_handling.apps.ExceptionHandlingConfig",
     "core.apps.CoreConfig",
     "api.apps.ApiConfig",
@@ -146,7 +146,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "accounts.User"
 
 
 INTERNAL_IPS = [

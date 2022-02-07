@@ -1,0 +1,26 @@
+{% extends 'accounts/base.html' %}
+
+{% block main %}
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0 text-dark">داشبورد</h1>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row pr-3">
+          <p>{{user.get_short_name}} عزیز خوش آمدی!</p>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

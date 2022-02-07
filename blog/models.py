@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.urls import reverse
 from extensions.utils import to_jalali
-from account.models import User
+from accounts.models import User
 from core.models import TimeStampedModel
 
 
@@ -100,7 +100,7 @@ class Blog(TimeStampedModel):
         )
 
     def get_absolute_url(self):
-        return reverse("account:detail", kwargs={"slug": self.slug})
+        return reverse("accounts:detail", kwargs={"slug": self.slug})
 
     objects = PublishedArticle()
 
