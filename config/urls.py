@@ -30,6 +30,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path("api/", include("api.urls"), name="api"),
     path("", include("django.contrib.auth.urls")),
-    path("", include("web.urls")),
+    path("", include("blog.urls")),
     path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -133,7 +133,7 @@ var _saveAs = (function(view) {
 			if (!no_auto_bom) {
 				blob = auto_bom(blob);
 			}
-			// First try a.download, then web filesystem, then object URLs
+			// First try a.download, then blog filesystem, then object URLs
 			var
 				  filesaver = this
 				, type = blob.type

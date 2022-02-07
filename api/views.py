@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import ArticleSerializer, UserSerializer
 from .permissions import IsSuperUserOrReadOnly, IsAuthorOrReadOnly, IsSuperUser
-from web.models import Blog
+from blog.models import Blog
 from account.models import User
 # Create your views here.
 

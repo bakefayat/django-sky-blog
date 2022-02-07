@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "rest_framework",
     "rest_framework.authtoken",
-    "web.apps.WebConfig",
+    "blog.apps.WebConfig",
     "account.apps.AccountConfig",
     "exception_handling.apps.ExceptionHandlingConfig",
     "core.apps.CoreConfig",

@@ -5552,7 +5552,7 @@
 	
 		/* If the number of columns in the DOM equals the number that we have to
 		 * process in DataTables, then we can use the offsets that are created by
-		 * the web- browser. No custom sizes can be set in order for this to happen,
+		 * the blog- browser. No custom sizes can be set in order for this to happen,
 		 * nor scrolling used
 		 */
 		if ( ie67 || ! userInputs && ! scrollX && ! scrollY &&
@@ -13080,7 +13080,7 @@
 			"bCollapse": null,
 	
 			/**
-			 * Width of the scrollbar for the web-browser's platform. Calculated
+			 * Width of the scrollbar for the blog-browser's platform. Calculated
 			 * during table initialisation.
 			 *  @type int
 			 *  @default 0

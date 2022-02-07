@@ -11,7 +11,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from web.models import Blog
+from blog.models import Blog
 from .models import User
 from .forms import ProfileForm
 from .mixins import (
@@ -23,7 +23,7 @@ from .mixins import (
     PreviewMixin,
     AuthorsMixin,
     ArticleActionMixin
-)
+    )
 
 
 class Login(LoginView):
@@ -94,7 +94,7 @@ class ArticlePreviewView(PreviewMixin, DetailView):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog, slug=slug)
 
-    template_name = "blog/articleDetail.html"
+    template_name = "blog/article_Detail.html"
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from web.models import Blog
+from blog.models import Blog
 from account.models import User
 
 class ArticleSerializer(serializers.ModelSerializer):

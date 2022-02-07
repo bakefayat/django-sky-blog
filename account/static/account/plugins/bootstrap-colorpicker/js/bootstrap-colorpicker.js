@@ -1032,7 +1032,7 @@ var ColorItem = function () {
     }
 
     /**
-     * Sanitizes a color format to one supported by web browsers.
+     * Sanitizes a color format to one supported by blog browsers.
      * Returns an empty string of the format can't be recognised.
      *
      * @param {String|*} format

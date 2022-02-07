@@ -34281,7 +34281,7 @@ module.exports = {
 	/** @preserve
 	 * Counter block mode compatible with  Dr Brian Gladman fileenc.c
 	 * derived from CryptoJS.mode.CTR
-	 * Jan Hruby jhruby.web@gmail.com
+	 * Jan Hruby jhruby.blog@gmail.com
 	 */
 	CryptoJS.mode.CTRGladman = (function () {
 	    var CTRGladman = CryptoJS.lib.BlockCipherMode.extend();

@@ -6431,7 +6431,7 @@
           var editorWidth = this.$editor.width();
           var toolbarHeight = this.$toolbar.height();
           var statusbarHeight = this.$statusbar.height();
-          // check if the web app is currently using another static bar
+          // check if the blog app is currently using another static bar
           var otherBarHeight = 0;
           if (this.options.otherStaticBar) {
               otherBarHeight = $$1(this.options.otherStaticBar).outerHeight();

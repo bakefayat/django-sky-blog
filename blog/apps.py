@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class WebConfig(AppConfig):
-    name = "web"
+    name = "blog"
     verbose_name = "بلاگ"
