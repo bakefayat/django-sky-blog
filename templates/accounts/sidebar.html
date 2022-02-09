@@ -24,12 +24,11 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
+          {% active request 'پروفایل' 'accounts:profile' 'fa-user' %}
+          {% active request 'تغییر گذرواژه' 'password_change' 'fa-user-edit' %}
             <li class="nav-item has-treeview menu-open">
               {% if user.is_superuser or user.is_staff or user.is_author %}
                 <a href="{% url 'accounts:list' %}" class="nav-link active">
-                  <i class="nav-icon fa fa-edit"></i>
                   <p>
                     مقالات
                     <i class="right fa fa-angle-left"></i>
@@ -39,10 +38,19 @@
                     {% active request 'لیست مقالات' 'accounts:list' 'fa-list' %}
                     {% active request 'مقاله جدید' 'accounts:create' 'fa-pen' %}
                 </ul>
+              </li>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{% url 'accounts:list' %}" class="nav-link active">
+                  <p>
+                    دسته بندی ها
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    {% active request 'لیست دسته ها' 'accounts:cat_list' 'fa-list-alt' %}
+                    {% active request 'دسته جدید' 'accounts:cat_create' 'fa-pen-alt' %}
+                </ul>
               {% endif %}
-              {% active request 'پروفایل' 'accounts:profile' 'fa-user' %}
-              {% active request 'تغییر گذرواژه' 'password_change' 'fa-user-edit' %}
-
             </li>
         </ul>
       </nav>

@@ -1,0 +1,63 @@
+{% extends 'accounts/base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-4">
+                {% if object_list %}
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>عنوان</th>
+                                <th class='d-none d-lg-table-cell'>نمایش</th>
+                                <th class='d-none d-lg-table-cell'>دسته بندی والد</th>
+                                <th class='d-none d-lg-table-cell'>انجام عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for category in object_list %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "accounts:cat_update" category.pk %}">
+                                                {{ category.title }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                        {% if category.display %}
+                                            <p>فعال</p>
+                                        {% else %}
+                                            <p>غیرفعال</p>
+                                        {% endif %}
+                                        </td>
+                                        <td>
+                                        {% if category.parent %}
+                                            {{ category.parent }}
+                                        {% else %}
+                                           والدی ندارد
+                                        {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'accounts:cat_update' category.pk %}">
+                                                <span class="badge badge-primary">ویرایش دسته بندی</span><br>
+                                            </a>
+                                            <a href="{% url 'accounts:cat_delete' category.pk %}">
+                                                <span class="badge badge-danger">حذف دسته بندی</span><br>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="card-body table-responsive text-right p-6">
+                        <h3>دسته بندی موجود نیست.</h3>
+                    </div>
+                {% endif %}
+                    <!-- /.card-body -->
+            </div>
+        <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

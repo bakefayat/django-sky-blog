@@ -47,6 +47,9 @@ class Category(models.Model):
 
     objects = ShownCategory()
 
+    def get_absolute_url(self):
+        return reverse("accounts:cat_detail", kwargs={"slug": self.slug})
+
 
 class Blog(TimeStampedModel):
     class Meta:

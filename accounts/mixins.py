@@ -68,6 +68,12 @@ class PreviewMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
+class StaffMixin:
+    def dispatch(self, request, *args, **kwargs):
+        check_staff_superuser(request)
+        return super().dispatch(request, *args, **kwargs)
+
+
 class AuthorsMixin:
     def dispatch(self, request, *args, **kwargs):
         if check_author_staff_superuser(request):
@@ -76,7 +82,7 @@ class AuthorsMixin:
             return redirect("accounts:profile")
 
 
-class ArticleActionMixin:
+class ActionMixin:
     @property
     def success_message(self):
         return NotImplemented

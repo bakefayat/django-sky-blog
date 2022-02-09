@@ -1,29 +1,15 @@
-from django.http import request, response
+from django.http import request
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.auth.views import LoginView
 from django.views.generic.list import ListView
-from django.views.generic import (
-    TemplateView,
-    CreateView,
-    DetailView,
-    UpdateView,
-    DeleteView,
-)
-from blog.models import Blog
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from blog.models import Blog, Category
 from .models import User
 from .forms import ProfileForm
-from .mixins import (
-    FieldsMixin,
-    FormValidMixin,
-    UpdateAccessMixin,
-    DraftEditMixin,
-    DeleteArticleMixin,
-    PreviewMixin,
-    AuthorsMixin,
-    ArticleActionMixin
-    )
+from .mixins import FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin,\
+    AuthorsMixin, ActionMixin, StaffMixin
 
 
 class Login(LoginView):
@@ -55,7 +41,7 @@ class ArticleListView(LoginRequiredMixin, AuthorsMixin, ListView):
 
 
 class ArticleCreateView(
-    LoginRequiredMixin, ArticleActionMixin, AuthorsMixin, FormValidMixin, FieldsMixin, CreateView
+    LoginRequiredMixin, AuthorsMixin, ActionMixin, FormValidMixin, FieldsMixin, CreateView
 ):
     model = Blog
     template_name = "accounts/articleCreate.html"
@@ -64,8 +50,8 @@ class ArticleCreateView(
 
 class ArticleUpdateView(
     LoginRequiredMixin,
-    ArticleActionMixin,
     AuthorsMixin,
+    ActionMixin,
     DraftEditMixin,
     UpdateAccessMixin,
     FormValidMixin,
@@ -78,7 +64,7 @@ class ArticleUpdateView(
 
 
 # show updated or created successfully message
-class ArticleDetailView(ArticleActionMixin, DetailView):
+class ArticleDetailView(ActionMixin, DetailView):
     model = Blog
     template_name = "accounts/article_detail.html"
 
@@ -97,6 +83,44 @@ class ArticlePreviewView(PreviewMixin, DetailView):
     template_name = "blog/article_Detail.html"
 
 
+class CategoryListView(LoginRequiredMixin, StaffMixin, ListView):
+    template_name = "accounts/category_list.html"
+    queryset = Category.objects.all()
+
+
+class CategoryCreateView(
+    LoginRequiredMixin, StaffMixin, ActionMixin, CreateView
+):
+    fields = "__all__"
+    model = Category
+    template_name = "accounts/category_create.html"
+    success_message = "دسته بندی با موفقیت ساخته شد."
+
+
+# show updated or created successfully message
+class CategoryDetailView(LoginRequiredMixin, StaffMixin, ActionMixin, DetailView):
+    model = Category
+    template_name = "accounts/article_detail.html"
+
+
+class CategoryUpdateView(
+    LoginRequiredMixin,
+    StaffMixin,
+    ActionMixin,
+    UpdateView,
+):
+    model = Category
+    fields = "__all__"
+    template_name = "accounts/category_update.html"
+    success_message = "با موفقیت بروزرسانی شد."
+
+
+class CategoryDeleteView(LoginRequiredMixin, StaffMixin, ActionMixin, DeleteView):
+    model = Category
+    success_url = reverse_lazy("accounts:cat_list")
+    template_name = "accounts/category_delete.html"
+
+
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -113,7 +137,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
 
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
 from .forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str

@@ -25,6 +25,7 @@ def to_jalali(time):
     return final_str
 
 
+# being author/staff/superuser
 def check_author_staff_superuser(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         if (
@@ -36,23 +37,24 @@ def check_author_staff_superuser(request: HttpRequest) -> HttpResponse:
     return False
 
 
-def check_staff_superuser(request: HttpRequest) -> HttpResponse:
-    if request.user.is_authenticated:
-        if (
-            request.user.is_staff
-        or request.user.is_superuser
-        ):
-            return True
-    return False
-
-
+# being owner of that article/staff/superuser
 def check_owner_staff_superuser(request: HttpRequest, article) -> HttpResponse:
     if request.user.is_authenticated:
         if (request.user.is_superuser
             or request.user.is_staff
             or request.user.is_author
             and article.author == request.user
-            ):
+        ):
             request.is_ok = True
             return request
     raise PermissionDenied
+
+
+def check_staff_superuser(request: HttpRequest) -> HttpResponse:
+    if request.user.is_authenticated:
+        if (
+            request.user.is_staff
+            or request.user.is_superuser
+        ):
+            return True
+    return False
