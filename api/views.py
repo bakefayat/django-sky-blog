@@ -2,11 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import ArticleSerializer, UserSerializer
+from .serializers import ArticleSerializer, UserSerializer, CategorySerializer
 from .permissions import IsSuperUserOrReadOnly, IsAuthorOrReadOnly, IsSuperUser
-from blog.models import Blog
+from blog.models import Blog, Category
 from accounts.models import User
-# Create your views here.
 
 
 class ArticleListApiView(ListCreateAPIView):
@@ -33,6 +32,18 @@ class UserDetailApiView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsSuperUser,)
 
+
+class CategoryListAPIView(ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (IsSuperUserOrReadOnly,)
+
+
+class CategoryDetailAPIVIEW(RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (IsSuperUserOrReadOnly,)
+    lookup_field = "slug"
 
 class RevokeTokenApiView(APIView):
     permission_classes = (IsAuthenticated,)

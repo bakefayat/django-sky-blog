@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from blog.models import Blog
+from blog.models import Blog, Category
 from accounts.models import User
+
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,4 +12,10 @@ class ArticleSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = "__all__"
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
         fields = "__all__"
