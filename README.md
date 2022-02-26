@@ -29,6 +29,7 @@ To run this project in development mode; Just use steps below:
 before running this project on the production make sure to do these steps:
 1. change default SQLite database to Postgresql or MySQL.
 2. change DEBUG=True to DEBUG=False (you can also create additional settings.py file for production.)
+3. uninstall django debug toolbar.
 
 
 ## TODO
