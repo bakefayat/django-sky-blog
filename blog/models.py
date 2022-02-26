@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.html import format_html
 from django.urls import reverse
 from extensions.utils import to_jalali
@@ -68,7 +69,7 @@ class Blog(TimeStampedModel):
     )
     title = models.CharField(max_length=255, verbose_name="عنوان")
     slug = models.SlugField(
-        unique=True, max_length=20, allow_unicode=True, verbose_name="نامک"
+        blank=True, unique=True, max_length=20, allow_unicode=True, verbose_name="نامک"
     )
     author = models.ForeignKey(
         User,
@@ -104,6 +105,15 @@ class Blog(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("accounts:detail", kwargs={"slug": self.slug})
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None, *args, **kwargs):
+        title = self.title
+        max_length = self._meta.get_field('slug').max_length
+        candidate = slugify(title, allow_unicode=True)[:max_length]
+        self.slug = candidate
+        Blog.objects.filter(slug=self.slug).exists()
+        super().save(*args, **kwargs)
 
     objects = PublishedArticle()
 
