@@ -1,3 +1,4 @@
+import itertools
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -106,13 +107,22 @@ class Blog(TimeStampedModel):
     def get_absolute_url(self):
         return reverse("accounts:detail", kwargs={"slug": self.slug})
 
+    # generates unique slugs.
+    def _generate_slug(self):
+        max_length = self._meta.get_field('slug').max_length
+        value = self.title
+        slug_candidate = slug_original = slugify(value, allow_unicode=True)[:max_length-2]
+        for i in itertools.count(1):
+            if not Blog.objects.filter(slug=slug_candidate).exists():
+                break
+            slug_candidate = f'{slug_original}-{i}'
+        self.slug = slug_candidate
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None, *args, **kwargs):
-        title = self.title
-        max_length = self._meta.get_field('slug').max_length
-        candidate = slugify(title, allow_unicode=True)[:max_length]
-        self.slug = candidate
-        Blog.objects.filter(slug=self.slug).exists()
+        # avoid regenerating slug.
+        if not self.pk:
+            self._generate_slug()
         super().save(*args, **kwargs)
 
     objects = PublishedArticle()
