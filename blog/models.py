@@ -1,10 +1,9 @@
 import itertools
 from django.db import models
 from django.utils import timezone
-from django.utils.text import slugify
 from django.utils.html import format_html
 from django.urls import reverse
-from extensions.utils import to_jalali
+from extensions.utils import to_jalali, unique_slug
 from accounts.models import User
 from core.models import TimeStampedModel
 
@@ -86,12 +85,8 @@ class Blog(TimeStampedModel):
         verbose_name="مقاله ویژه",
         default=False,
     )
-    status = models.CharField(
-        max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت"
-    )
-    category = models.ManyToManyField(
-        Category, related_name="articles", verbose_name="دسته بندی"
-    )
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
+    category = models.ManyToManyField(Category, related_name="articles", verbose_name="دسته بندی")
 
     def category_list(self):
         return "، ".join([i.title for i in self.category.shown()])
@@ -107,22 +102,13 @@ class Blog(TimeStampedModel):
     def get_absolute_url(self):
         return reverse("accounts:detail", kwargs={"slug": self.slug})
 
-    # generates unique slugs.
-    def _generate_slug(self):
-        max_length = self._meta.get_field('slug').max_length
-        value = self.title
-        slug_candidate = slug_original = slugify(value, allow_unicode=True)[:max_length-2]
-        for i in itertools.count(1):
-            if not Blog.objects.filter(slug=slug_candidate).exists():
-                break
-            slug_candidate = f'{slug_original}-{i}'
-        self.slug = slug_candidate
-
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None, *args, **kwargs):
         # avoid regenerating slug.
         if not self.pk:
-            self._generate_slug()
+            title = self.title
+            max_length = self._meta.get_field('slug').max_length
+            self.slug = unique_slug(title, max_length, Blog)
         super().save(*args, **kwargs)
 
     objects = PublishedArticle()

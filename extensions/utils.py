@@ -1,12 +1,19 @@
+import itertools
 from django.http import HttpRequest, HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
-from .jalali import(
-    Gregorian, 
-    datetime_to_str, 
-    mounth_number_to_name, 
-    en_to_fa_numbers
-)
+from django.utils.text import slugify
+from .jalali import Gregorian, datetime_to_str, mounth_number_to_name, en_to_fa_numbers
+
+
+# create unique slug.
+def unique_slug(title, max_length, model_name):
+    slug_candidate = slug_original = slugify(title, allow_unicode=True)[:max_length - 2]
+    for i in itertools.count(1):
+        if not model_name.objects.filter(slug=slug_candidate).exists():
+            break
+        slug_candidate = f'{slug_original}-{i}'
+    return slug_candidate
 
 
 def to_jalali(time):
