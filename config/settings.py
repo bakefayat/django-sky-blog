@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "exception_handling.apps.ExceptionHandlingConfig",
     "core.apps.CoreConfig",
     "api.apps.ApiConfig",
+    "pages.apps.PagesConfig",
     "extensions",
 ]
 
