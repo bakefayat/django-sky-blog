@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+{% load tags %}
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+{% block head_title %}
+    {{object.title}}
+{% endblock %}
+{% block blog_post %}
+    <p>{{ object.description }}</p>
+{% endblock %}
+{% block nav-items %}
+    {% nav_items %}
+{% endblock nav-items %}

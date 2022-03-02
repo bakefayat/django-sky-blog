@@ -1,6 +1,6 @@
 from django import template
-from ..models import Category
-
+from blog.models import Category
+from pages.models import Page
 register = template.Library()
 
 
@@ -8,6 +8,12 @@ register = template.Library()
 def navbar_cat():
     cat = {"categories": Category.objects.all().filter(display=True)}
     return cat
+
+
+@register.inclusion_tag("pages/nav-items.html")
+def nav_items():
+    navbar_items = {"items": Page.objects.published()}
+    return navbar_items
 
 
 @register.inclusion_tag("accounts/active.html")
