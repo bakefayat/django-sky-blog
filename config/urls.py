@@ -29,6 +29,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path("api/", include("api.urls"), name="api"),
+    path("pages/", include("pages.urls"), name="pages"),
     path("", include("django.contrib.auth.urls")),
     path("", include("blog.urls")),
     path('__debug__/', include(debug_toolbar.urls)),

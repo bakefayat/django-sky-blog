@@ -3,6 +3,11 @@ from django.utils import timezone
 from core.models import TimeStampedModel
 
 
+class PublishedPage(models.Manager):
+    def published(self):
+        return self.filter(status="pub")
+
+
 class Page(TimeStampedModel):
     class Meta:
         verbose_name = "برگه"
@@ -20,3 +25,5 @@ class Page(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    objects = PublishedPage()
