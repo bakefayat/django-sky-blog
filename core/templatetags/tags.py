@@ -4,19 +4,19 @@ from pages.models import Page
 register = template.Library()
 
 
-@register.inclusion_tag("blog/navbar.html")
+@register.inclusion_tag("core/navbar.html")
 def navbar_cat():
     cat = {"categories": Category.objects.all().filter(display=True)}
     return cat
 
 
-@register.inclusion_tag("pages/nav-items.html")
+@register.inclusion_tag("core/nav-items.html")
 def nav_items():
     navbar_items = {"items": Page.objects.published()}
     return navbar_items
 
 
-@register.inclusion_tag("accounts/active.html")
+@register.inclusion_tag("core/active.html")
 def active(request, content, url_name, fa):
     context = {
         "request": request,
