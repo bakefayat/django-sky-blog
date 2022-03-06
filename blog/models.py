@@ -18,6 +18,11 @@ class ShownCategory(models.Manager):
         return self.filter(display=True)
 
 
+class PublishedComment(models.Manager):
+    def published(self):
+        return self.filter(display=True)
+
+
 class Category(models.Model):
     class Meta:
         verbose_name = "دسته بندی"
@@ -116,3 +121,27 @@ class Blog(TimeStampedModel):
     jpublished.short_description = "زمان انتشار"
     category_list.short_description = "دسته بندی"
     thumb.short_description = "تصویر بندانگشتی"
+
+
+class Comment(TimeStampedModel):
+    class Meta:
+        verbose_name = "نظر"
+        verbose_name_plural = "نظرات"
+        ordering = ["created"]
+
+    post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments", verbose_name = "نظر")
+    name = models.CharField(max_length=50, verbose_name="نام")
+    email = models.EmailField(verbose_name="ایمیل")
+    body = models.TextField(max_length=1000, verbose_name="متن نظر")
+    display = models.BooleanField(
+        verbose_name="نمایش",
+        default=False,
+    )
+
+    def __str__(self):
+        return self.body
+
+    def jpublished(self):
+        return to_jalali(self.created)
+
+    objects = PublishedComment()

@@ -9,22 +9,49 @@
     <div class="card mb-1">
         <img class="card-img-top" src="{{ object.image.url }}"  alt="{{ object.slug}}" style='height:300px;' />
         <div class="card-body">
-        
+
             <div class="small text-muted">
                 {{ object.jpublished }}
             </div>
-            
+
             {% if not article.is_special or user.is_specialuser or article.author == user %}
             {{ object.description|safe|linebreaks }}
 
             {% else %}
                 <p>شما دسترسی ندارید.</p>
             {% endif %}
-            
+
             {% for cat in object.category.shown %}
             <a href="{% url 'blog:category' cat.slug %}">#{{ cat.title }}</a>
             {% endfor %}
-        
+
+        </div>
+    </div>
+
+
+    <div class="card mb-12">
+        <div class="card-header">نظرات</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                           {% for comment in object.comments.published %}
+                            <div class="comments" style="padding: 10px;">
+                              <p>
+                                {{ comment.name }}
+                                <span class=" text-muted font-weight-normal">
+                                  {{ comment.jpublished }}
+                                </span>
+                              </p>
+                              {{ comment.body | linebreaks }}
+                            <hr>
+                            </div>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
