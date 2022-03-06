@@ -1,5 +1,8 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.shortcuts import get_object_or_404
+
+from .forms import CommentForm
+from .mixins import CommentFieldsMixin, CommentFormValidMixin
 from .models import Blog, Category
 from core.mixins import SearchActionMixin
 from accounts.models import User
@@ -22,12 +25,13 @@ class SearchListView(SearchActionMixin, ListView):
         return context
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(CreateView, CommentFormValidMixin, DetailView):
     def get_object(self):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog.objects.published(), slug=slug)
 
     template_name = "blog/article_detail.html"
+    form_class = CommentForm
 
 
 class CategoryListView(ListView):
