@@ -26,6 +26,12 @@ class SearchListView(SearchActionMixin, ListView):
 
 
 class ArticleDetailView(CreateView, CommentFormValidMixin, DetailView):
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # TODO: post id should be dynamic.
+        kwargs["post"] = 1
+        return kwargs
+
     def get_object(self):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog.objects.published(), slug=slug)

@@ -144,4 +144,8 @@ class Comment(TimeStampedModel):
     def jpublished(self):
         return to_jalali(self.created)
 
+    # TODO: success message should be created.
+    def get_absolute_url(self):
+        return reverse("accounts:list")
+
     objects = PublishedComment()
