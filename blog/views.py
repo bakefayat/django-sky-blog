@@ -29,7 +29,9 @@ class ArticleDetailView(CreateView, CommentFormValidMixin, DetailView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         # TODO: post id should be dynamic.
-        kwargs["post"] = 1
+        slug = self.kwargs.get("slug")
+        post = get_object_or_404(Blog.objects.published(), slug=slug).id
+        kwargs["post"] = post
         return kwargs
 
     def get_object(self):
