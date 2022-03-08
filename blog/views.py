@@ -1,8 +1,8 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.shortcuts import get_object_or_404
 
 from .forms import CommentForm
-from .mixins import CommentFieldsMixin, CommentFormValidMixin
+from .mixins import CommentFormValidMixin
 from .models import Blog, Category
 from core.mixins import SearchActionMixin
 from accounts.models import User
@@ -28,8 +28,8 @@ class SearchListView(SearchActionMixin, ListView):
 class ArticleDetailView(CreateView, CommentFormValidMixin, DetailView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        # TODO: post id should be dynamic.
         slug = self.kwargs.get("slug")
+        # get id of the post -> required for post field on Comment model.
         post = get_object_or_404(Blog.objects.published(), slug=slug).id
         kwargs["post"] = post
         return kwargs
@@ -72,3 +72,10 @@ class UserListView(ListView):
 
     template_name = "blog/user_list.html"
     paginate_by = 2
+
+
+# show success message
+class CommentDetailView(TemplateView):
+
+    template_name = "blog/comment_submit.html"
+    model = Blog

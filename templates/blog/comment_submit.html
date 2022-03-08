@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    نظرات
+{% endblock %}
+
+{% block head_title %}
+    ثبت نظر
+{% endblock %}
+
+{% block blog_post %}
+    <div class="card mb-1">
+        <div class="card-body">
+        {% if request.user.is_superuser %}
+            <h3>نظر ثبت شد.</h3>
+        {% else %}
+            <h3>نظر ثبت شد و در انتظار تایید مدیر می باشد.</h3>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
