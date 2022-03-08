@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
-from blog.models import Blog, Category
+from blog.models import Blog, Category, Comment
 from .models import User
 from .forms import ProfileForm
 from .mixins import FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin,\
@@ -119,6 +119,34 @@ class CategoryDeleteView(LoginRequiredMixin, StaffMixin, ActionMixin, DeleteView
     model = Category
     success_url = reverse_lazy("accounts:cat_list")
     template_name = "accounts/category_delete.html"
+
+
+'''
+Comment System
+'''
+
+
+class CommentListView(LoginRequiredMixin, StaffMixin, ListView):
+    template_name = "accounts/comment_list.html"
+    queryset = Comment.objects.all()
+
+
+class CommentUpdateView(
+    LoginRequiredMixin,
+    StaffMixin,
+    ActionMixin,
+    UpdateView,
+):
+    model = Comment
+    fields = "__all__"
+    template_name = "accounts/comment_update.html"
+    success_message = "با موفقیت بروزرسانی شد."
+    success_url = reverse_lazy("accounts:comment_list")
+
+
+'''
+end of comment system
+'''
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

@@ -50,7 +50,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("body", "name", "email", "display")
+    list_display = ("body", "name", "email", "post", "display")
     list_filter = ["display"]
 
 

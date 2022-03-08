@@ -1,0 +1,59 @@
+{% extends 'accounts/base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-4">
+                {% if object_list %}
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>متن</th>
+                                <th>فرستنده</th>
+                                <th>ایمیل</th>
+                                <th>پست</th>
+                                <th class='d-none d-lg-table-cell'>انجام عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for comment in object_list %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "accounts:comment_update" comment.pk %}">
+                                                {{ comment.body|safe }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <p>{{ comment.name }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ comment.email }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ comment.post }}</p>
+                                        </td>
+                                        <td>
+                                            {% if comment.display == False %}
+                                            {% comment %}<a href="{% url 'accounts:cat_update' comment.pk %}">{% endcomment %}
+                                                <span class="badge badge-primary">تایید</span>
+                                            {% endif %}
+                                            {% comment %}<a href="{% url 'accounts:cat_delete' comment.pk %}">{% endcomment %}
+                                                <span class="badge badge-danger">حذف</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="card-body table-responsive text-right p-6">
+                        <h3>نظری موجود نیست.</h3>
+                    </div>
+                {% endif %}
+                    <!-- /.card-body -->
+            </div>
+        <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

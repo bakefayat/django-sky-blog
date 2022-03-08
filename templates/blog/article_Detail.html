@@ -45,7 +45,7 @@
                                   {{ comment.jpublished }}
                                 </span>
                               </p>
-                              {{ comment.body | linebreaks }}
+                              {{ comment.body|safe|linebreaks }}
                             <hr>
                             </div>
                             {% endfor %}

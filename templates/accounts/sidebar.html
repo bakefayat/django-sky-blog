@@ -50,8 +50,23 @@
                     {% active request 'لیست دسته ها' 'accounts:cat_list' 'fa-list-alt' %}
                     {% active request 'دسته جدید' 'accounts:cat_create' 'fa-pen-alt' %}
                 </ul>
+            </li>
+
+        <!--comments-->
+                    <li class="nav-item has-treeview menu-open">
+                <a href="{% url 'accounts:list' %}" class="nav-link active">
+                  <p>
+                    نظرات
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    {% active request 'لیست نظرات' 'accounts:comment_list' 'fa-list-alt' %}
+                </ul>
               {% endif %}
             </li>
+        <!--end of comments-->
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
