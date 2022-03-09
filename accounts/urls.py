@@ -17,7 +17,7 @@ from .views import (
     CategoryListView,
     CategoryCreateView,
     CategoryDetailView,
-    CategoryUpdateView, CategoryDeleteView, CommentListView, CommentUpdateView, CommentDeleteView,
+    CategoryUpdateView, CategoryDeleteView, CommentListView, CommentUpdateView, CommentDeleteView, CommentAcceptView,
 )
 
 app_name = "accounts"
@@ -41,6 +41,7 @@ urlpatterns = [
     path("comments/", CommentListView.as_view(), name="comment_list"),
     path("comments/update/<int:pk>/", CommentUpdateView.as_view(), name="comment_update"),
     path("comments/delete/<int:pk>/", CommentDeleteView.as_view(), name="comment_delete"),
+    path("comments/accept/<int:pk>/", CommentAcceptView.as_view(), name="comment_accept"),
 
     path("profile/", ProfileUpdateView.as_view(), name="profile"),
 ]

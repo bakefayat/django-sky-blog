@@ -134,20 +134,26 @@ class CommentListView(LoginRequiredMixin, StaffMixin, ListView):
 class CommentUpdateView(
     LoginRequiredMixin,
     StaffMixin,
-    ActionMixin,
     UpdateView,
 ):
     model = Comment
     fields = "__all__"
     template_name = "accounts/comment_update.html"
-    success_message = "با موفقیت بروزرسانی شد."
     success_url = reverse_lazy("accounts:comment_list")
 
 
-class CommentDeleteView(LoginRequiredMixin, StaffMixin, ActionMixin, DeleteView):
+class CommentDeleteView(LoginRequiredMixin, StaffMixin, DeleteView):
     model = Comment
     success_url = reverse_lazy("accounts:comment_list")
     template_name = "accounts/comment_delete.html"
+
+
+class CommentAcceptView(LoginRequiredMixin, StaffMixin, UpdateView):
+    model = Comment
+    fields = ["display"]
+    template_name = "accounts/comment_accept.html"
+    success_url = reverse_lazy("accounts:comment_list")
+
 
 '''
 end of comment system
