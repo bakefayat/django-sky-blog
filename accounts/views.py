@@ -144,6 +144,11 @@ class CommentUpdateView(
     success_url = reverse_lazy("accounts:comment_list")
 
 
+class CommentDeleteView(LoginRequiredMixin, StaffMixin, ActionMixin, DeleteView):
+    model = Comment
+    success_url = reverse_lazy("accounts:comment_list")
+    template_name = "accounts/comment_delete.html"
+
 '''
 end of comment system
 '''

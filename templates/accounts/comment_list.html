@@ -38,7 +38,7 @@
                                             {% comment %}<a href="{% url 'accounts:cat_update' comment.pk %}">{% endcomment %}
                                                 <span class="badge badge-primary">تایید</span>
                                             {% endif %}
-                                            {% comment %}<a href="{% url 'accounts:cat_delete' comment.pk %}">{% endcomment %}
+                                            <a href="{% url 'accounts:comment_delete' comment.pk %}">
                                                 <span class="badge badge-danger">حذف</span>
                                         </td>
                                     </tr>
