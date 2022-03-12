@@ -31,9 +31,31 @@ before running this project on the production make sure to do these steps:
 2. change DEBUG=True to DEBUG=False (you can also create additional settings.py file for production.)
 3. uninstall django debug toolbar.
 
+##Run project in replit.com
+replit is a online code editor. it also gives you hosting of your project.<br>
+follow steps bellow:
+1. clone github project on replit.
+2. install requirements file with pip.
+3. follow secrets guide on replit for SECRET_KEY of project.
+4. set ALLOWED_HOSTS in settings file to ```['*']```
+5. run migrate command on console: ```python manage.py migrate```
+6. add below line to settings file to fix CSRF_TOKEN error.
+```
+CSRF_TRUSTED_ORIGINS = [your replit url like: 'https://django-simple-blog.ehsanbakefayat.repl.co']
+```
+6. add these lines to .replit file
+```
+language = "python3"
+run = "python manage.py runserver 0.0.0.0:8000"
+```
+7. set DEBUG = FALSE in settings.py
+8. remove debug_toolbar from INSTALLED_APPS and middlewares.
+9. hit run button and enjoy it!
 
 ## TODO
 - [x] a RESTful service. powered by DRF.
+- [x] Comment system.
 - [x] admin panel on [http://localhost:8000/accounts](http://localhost:8000/accounts)
-- [ ] Default DB should be changed to MySQL or Postgres
+- [ ] Modular frontend.
+- [ ] Default DB should be changed to MySQL or Postgres.
 - [ ] Admin user be able to change design of website.
