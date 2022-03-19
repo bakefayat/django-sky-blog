@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "api.apps.ApiConfig",
     "pages.apps.PagesConfig",
+    "modules.apps.ModulesConfig",
     "extensions",
 ]
 
