@@ -1,0 +1,6 @@
+{% for module in modules %}
+    <div class="card mb-4">
+        <div class="card-header">{{ module.title }}</div>
+        <div class="card-body">{{ module.body|safe }}</div>
+    </div>
+{% endfor %}

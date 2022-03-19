@@ -73,16 +73,29 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">دیگه چه خبر؟</div>
-                        <div class="card-body">این سایت تستی تجربه من از فریمورک جنگو هستش</div>
-                    </div>
+
+
+                    <!-- left sidebar-->
+                    {% widget 'left' %}
                 </div>
             </div>
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
+        <!-- Template tags -->
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    {% widget 'foot1' %}
+                </div>
+                <div class="col-lg-4">
+                    {% widget 'foot2' %}
+                </div>
+                <div class="col-lg-4">
+                    {% widget 'foot3' %}
+                </div>
+            </div>
+        </div>
             <div class="container"><p class="m-0 text-center text-white">تمامی حقوق برای این وبسایت محفوظ می باشد.</p></div>
         </footer>
         <!-- Bootstrap core JS-->
