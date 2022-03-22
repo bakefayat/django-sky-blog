@@ -1,4 +1,3 @@
-import itertools
 from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
@@ -63,9 +62,6 @@ class Blog(TimeStampedModel):
         verbose_name_plural = "مقالات"
         ordering = ["-published"]
 
-    def __str__(self):
-        return self.title
-
     STATUS_CHOICES = (
         ("d", "پیش نویس"),
         ("p", "منتشر شده"),
@@ -104,6 +100,14 @@ class Blog(TimeStampedModel):
             f"<img src='{self.image.url}' height=80px width=100px style='border-radius:20px;'>"
         )
 
+    def __str__(self):
+        return self.title
+
+    def show_url(self):
+        url = reverse("blog:single", kwargs={"slug": self.slug})
+        response = format_html(f'<a href="{url}">لینک به مقاله</a>')
+        return response
+
     def get_absolute_url(self):
         return reverse("accounts:detail", kwargs={"slug": self.slug})
 
@@ -121,6 +125,7 @@ class Blog(TimeStampedModel):
     jpublished.short_description = "زمان انتشار"
     category_list.short_description = "دسته بندی"
     thumb.short_description = "تصویر بندانگشتی"
+    show_url.short_description = "نمایش مقاله"
 
 
 class Comment(TimeStampedModel):
@@ -129,7 +134,7 @@ class Comment(TimeStampedModel):
         verbose_name_plural = "نظرات"
         ordering = ["created"]
 
-    post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments", verbose_name = "نظر")
+    post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments", verbose_name="نظر")
     name = models.CharField(max_length=50, verbose_name="نام")
     email = models.EmailField(verbose_name="ایمیل")
     body = models.TextField(max_length=1000, verbose_name="متن نظر")

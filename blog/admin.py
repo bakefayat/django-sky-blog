@@ -37,10 +37,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_filter = ["category", "is_special"]
     prepopulated_fields = {"slug": ("title",)}
     actions = [make_published, make_draft, make_special]
-    # def categoryList(self, obj):
-    #     return('، '.join([category.title for category in obj.category.all()]))
-
-    # categoryList.short_description = 'موضوع'
+    readonly_fields = ("show_url",)
 
 
 class CategoryAdmin(admin.ModelAdmin):
