@@ -26,6 +26,14 @@ class Login(LoginView):
             return reverse_lazy("accounts:profile")
 
 
+class RegisterPendingView(TemplateView):
+    template_name = "accounts/register_done.html"
+
+
+class RegisterCompleteView(TemplateView):
+    template_name = "accounts/register_complete.html"
+
+
 class HomeView(LoginRequiredMixin, AuthorsMixin, TemplateView):
     template_name = "accounts/admin.html"
 
