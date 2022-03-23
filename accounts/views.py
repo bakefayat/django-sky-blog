@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.contrib.admin.models import LogEntry
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from blog.models import Blog, Category, Comment
@@ -181,6 +182,11 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "accounts/profileUpdate.html"
     success_url = reverse_lazy("accounts:profile")
     form_class = ProfileForm
+
+
+class LogEventsListView(ListView):
+    queryset = LogEntry.objects.all()
+    template_name = "accounts/log.html"
 
 
 from django.http import HttpResponse

@@ -18,6 +18,7 @@ from .views import (
     CategoryCreateView,
     CategoryDetailView,
     CategoryUpdateView, CategoryDeleteView, CommentListView, CommentUpdateView, CommentDeleteView, CommentAcceptView,
+    LogEventsListView,
 )
 
 app_name = "accounts"
@@ -44,4 +45,6 @@ urlpatterns = [
     path("comments/accept/<int:pk>/", CommentAcceptView.as_view(), name="comment_accept"),
 
     path("profile/", ProfileUpdateView.as_view(), name="profile"),
+
+    path("log/", LogEventsListView.as_view(), name="log")
 ]

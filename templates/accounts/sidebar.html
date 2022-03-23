@@ -63,9 +63,24 @@
                 <ul class="nav nav-treeview">
                     {% active request 'لیست نظرات' 'accounts:comment_list' 'fa-list-alt' %}
                 </ul>
-              {% endif %}
             </li>
         <!--end of comments-->
+
+        <!--additional-->
+            <li class="nav-item has-treeview menu-open">
+                <a href="{% url 'accounts:list' %}" class="nav-link active">
+                  <p>
+                    سایر تنظیمات
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    {% active request 'لاگ' 'accounts:log' 'fa-list-alt' %}
+                </ul>
+              {% endif %}
+            </li>
+        <!--end of additional-->
+
 
         </ul>
       </nav>
