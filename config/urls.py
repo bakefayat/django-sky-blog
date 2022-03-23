@@ -26,6 +26,7 @@ urlpatterns = [
     ),
     path("activate/<str:uidb64>/<str:token>/", activate, name="activate"),
     path("accounts/", include("accounts.urls"), name="home"),
+    path("admin/doc/", include("django.contrib.admindocs.urls"), name="admin_doc"),
     path("admin/", admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path("api/", include("api.urls"), name="api"),
