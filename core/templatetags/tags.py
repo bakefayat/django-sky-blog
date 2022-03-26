@@ -2,6 +2,8 @@ from django import template
 from blog.models import Category
 from pages.models import Page
 from modules.models import Module
+from core.models import SiteProfile
+from django.contrib.sites.models import Site
 register = template.Library()
 
 
@@ -34,3 +36,10 @@ def active(request, content, url_name, fa):
         "fa": fa,
     }
     return context
+
+
+@register.simple_tag()
+def site_profile(item):
+    current_site = Site.objects.get_current()
+    profile = SiteProfile.objects.get(site=current_site)
+    return profile.__getattribute__(item)

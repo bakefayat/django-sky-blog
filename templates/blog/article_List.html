@@ -1,10 +1,10 @@
 {% extends 'blog/base_list.html' %}
 {% load tags %}
 {% block head_title %}
-    home page
+    {% site_profile 'title' %}
 {% endblock %}
 {% block head_description %}
-    صفحه خانگی وب سایت ما اینجا می باشد.
+    {% site_profile 'description' %}
 {% endblock %}
 {% block next_page %}
     {% url 'blog:index' page_obj.next_page_number %}
