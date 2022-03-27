@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
+{% load hitcount_tags %}
+
 {% block title %}
     {{ object.title }}
 {% endblock %}
@@ -13,6 +15,7 @@
 
             <div class="small text-muted">
                 {{ object.jpublished }}
+                | تعداد بازدید: {% get_hit_count for object %}
             </div>
 
             {% if not article.is_special or user.is_specialuser or article.author == user %}

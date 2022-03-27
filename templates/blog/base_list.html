@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load tags %}
+{% load hitcount_tags %}
+
 {% block head_title %}
 لیست مقالات
 {% endblock %}
@@ -14,6 +16,8 @@
                         <span class="badge" style="background-color: #a21515;">مقاله ویژه</span><br>
                     {% endif %}
                     {{ article.jpublished }}
+                    | تعداد بازدید: {% get_hit_count for article %}
+
                 </div>
                 <a href="{% url 'blog:single' article.slug %}">
                     <h2 class="card-title">

@@ -1,5 +1,6 @@
-from django.views.generic import ListView, DetailView, CreateView, TemplateView
+from django.views.generic import ListView, CreateView, TemplateView
 from django.shortcuts import get_object_or_404
+from hitcount.views import HitCountDetailView
 
 from .forms import CommentForm
 from .mixins import CommentFormValidMixin
@@ -25,7 +26,7 @@ class SearchListView(SearchActionMixin, ListView):
         return context
 
 
-class ArticleDetailView(CreateView, CommentFormValidMixin, DetailView):
+class ArticleDetailView(CreateView, CommentFormValidMixin, HitCountDetailView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         slug = self.kwargs.get("slug")
@@ -40,6 +41,7 @@ class ArticleDetailView(CreateView, CommentFormValidMixin, DetailView):
 
     template_name = "blog/article_detail.html"
     form_class = CommentForm
+    count_hit = True
 
 
 class CategoryListView(ListView):
