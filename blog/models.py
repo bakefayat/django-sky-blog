@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
 from django.utils import timezone
 from django.utils.html import format_html
 from django.urls import reverse
+from hitcount.models import HitCount
 from extensions.utils import to_jalali, unique_slug
 from accounts.models import User
 from core.models import TimeStampedModel
@@ -88,6 +90,7 @@ class Blog(TimeStampedModel):
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
     category = models.ManyToManyField(Category, related_name="articles", verbose_name="دسته بندی")
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count')
 
     def category_list(self):
         return "، ".join([i.title for i in self.category.shown()])
@@ -105,7 +108,7 @@ class Blog(TimeStampedModel):
 
     def show_url(self):
         url = reverse("blog:single", kwargs={"slug": self.slug})
-        response = format_html(f'<a href="{url}">لینک به مقاله</a>')
+        response = format_html(f'<a href="{url}">{self.title}</a>')
         return response
 
     def get_absolute_url(self):

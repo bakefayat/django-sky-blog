@@ -66,7 +66,7 @@
                             </form>
                         </div>
                     </div>
-                    <!-- Categories widget-->
+                    <!-- left widgets-->
                     <div class="card mb-4">
                         <div class="card-header">دسته بندی ها</div>
                         <div class="card-body">
@@ -79,9 +79,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card mb-4">
+                        <div class="card-header">پربازدیدترین ها</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="list-unstyled mb-0">
+                                        {% top_posts %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-                    <!-- left sidebar-->
+                    <!-- left sidebar handled by django-->
                     {% widget 'left' %}
                 </div>
             </div>

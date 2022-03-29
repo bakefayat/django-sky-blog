@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Category
+from blog.models import Category, Blog
 from pages.models import Page
 from modules.models import Module
 from core.models import SiteProfile
@@ -14,18 +14,28 @@ def widget(position):
     return cat
 
 
+# list of categories
 @register.inclusion_tag("core/navbar.html")
 def navbar_cat():
     cat = {"categories": Category.objects.all().filter(display=True)}
     return cat
 
 
+# list of top views
+@register.inclusion_tag("core/top_posts.html")
+def top_posts():
+    top = {"popular_posts": Blog.objects.order_by('-hit_count_generic__hits')[:3]}
+    return top
+
+
+# list of pages
 @register.inclusion_tag("core/nav-items.html")
 def nav_items():
     navbar_items = {"items": Page.objects.published()}
     return navbar_items
 
 
+# show font-icons and details in accounts app.
 @register.inclusion_tag("core/active.html")
 def active(request, content, url_name, fa):
     context = {
@@ -38,6 +48,7 @@ def active(request, content, url_name, fa):
     return context
 
 
+# show informations of website.
 @register.simple_tag()
 def site_profile(item):
     current_site = Site.objects.get_current()
