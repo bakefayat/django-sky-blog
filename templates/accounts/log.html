@@ -1,4 +1,5 @@
 {% extends 'accounts/base.html' %}
+{% load tags %}
 
 {% block main %}
     <div class="row">
@@ -11,6 +12,7 @@
                             <tr>
                                 <th>عنوان تغییر</th>
                                 <th class='d-none d-lg-table-cell'>کلاس</th>
+                                <th class='d-none d-lg-table-cell'>زمان تغییر</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -28,6 +30,9 @@
                                                 نامشخص
                                             {% endif %}
                                         </td>
+                                        <td>
+                                            {% jdate entry.action_time %}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -35,7 +40,7 @@
                     </div>
                 {% else %}
                     <div class="card-body table-responsive text-right p-6">
-                        <h3>مقاله ای موجود نیست.</h3>
+                        <h3>لاگی موجود نیست.</h3>
                     </div>
                 {% endif %}
                     <!-- /.card-body -->
