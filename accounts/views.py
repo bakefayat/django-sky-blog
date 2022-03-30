@@ -1,10 +1,17 @@
-from django.http import request
+from django.http import request, HttpResponse
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from django.template.loader import render_to_string
+from .forms import SignupForm
+from .tokens import account_activation_token
 from blog.models import Blog, Category, Comment
 from .models import User, Logs
 from .forms import ProfileForm
@@ -84,7 +91,7 @@ class ArticleDeleteView(LoginRequiredMixin, AuthorsMixin, DeleteArticleMixin, De
 
 
 class ArticlePreviewView(PreviewMixin, DetailView):
-    def get_object(self):
+    def get_object(self, *args, **kwargs):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Blog, slug=slug)
 
@@ -174,7 +181,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         kwargs["user"] = self.request.user
         return kwargs
 
-    def get_object(self):
+    def get_object(self, *args, **kwargs):
         return User.objects.get(pk=self.request.user.pk)
 
     model = User
@@ -188,16 +195,7 @@ class LogEventsListView(ListView):
     template_name = "accounts/log.html"
 
 
-from django.http import HttpResponse
-from .forms import SignupForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .tokens import account_activation_token
-from django.core.mail import EmailMessage
-
-
+# registration and user activation
 class RegisterCreateView(CreateView):
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -223,7 +221,7 @@ class RegisterCreateView(CreateView):
     template_name = "accounts/register_form.html"
 
 
-def activate(request, uidb64, token):
+def activate(req, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -232,8 +230,6 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # login(request, user)
-        # return redirect('home')
         return redirect("register-complete")
     else:
         return HttpResponse("فعالسازی اکانت ناموفق بود.")
