@@ -45,6 +45,7 @@ class CategoryDetailAPIVIEW(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsSuperUserOrReadOnly,)
     lookup_field = "slug"
 
+
 class RevokeTokenApiView(APIView):
     permission_classes = (IsAuthenticated,)
 

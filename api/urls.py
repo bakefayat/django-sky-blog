@@ -1,6 +1,7 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
-from .views import ArticleListApiView, ArticleDetailApiView, UserListApiView, UserDetailApiView, RevokeTokenApiView, CategoryListAPIView, CategoryDetailAPIVIEW
+from .views import ArticleListApiView, ArticleDetailApiView, UserListApiView, UserDetailApiView, RevokeTokenApiView,\
+    CategoryListAPIView, CategoryDetailAPIVIEW
 app_name = "api"
 
 urlpatterns = [

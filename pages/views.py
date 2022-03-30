@@ -7,7 +7,6 @@ class PageDetailView(DetailView):
     template_name = "pages/detail.html"
     model = Page
 
-    def get_object(self):
+    def get_object(self, *args, **kwargs):
         slug = self.kwargs.get("slug")
         return get_object_or_404(Page.objects.published(), slug=slug)
-
