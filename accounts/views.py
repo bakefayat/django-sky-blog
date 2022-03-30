@@ -3,11 +3,10 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.contrib.admin.models import LogEntry
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from blog.models import Blog, Category, Comment
-from .models import User
+from .models import User, Logs
 from .forms import ProfileForm
 from .mixins import FieldsMixin, FormValidMixin, UpdateAccessMixin, DraftEditMixin, DeleteArticleMixin, PreviewMixin,\
     AuthorsMixin, ActionMixin, StaffMixin
@@ -185,7 +184,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class LogEventsListView(ListView):
-    queryset = LogEntry.objects.all()
+    queryset = Logs.objects.all()
     template_name = "accounts/log.html"
 
 

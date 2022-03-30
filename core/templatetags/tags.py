@@ -49,7 +49,7 @@ def active(request, content, url_name, fa):
     return context
 
 
-# show informations of website.
+# show information of website.
 @register.simple_tag()
 def site_profile(item):
     current_site = Site.objects.get_current()

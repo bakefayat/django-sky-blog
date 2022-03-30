@@ -19,19 +19,18 @@
                                 {% for entry in object_list %}
                                     <tr>
                                         <td>
-                                            <a href="{{ entry.get_admin_url }}">{{ entry }}</a>
+                                            <a href="{{ entry.log.get_admin_url }}">{{ entry.log }}</a>
                                             </a>
                                         </td>
-
                                         <td>
-                                            {% if entry.content_type %}
-                                                {{ entry.content_type.name }}
+                                            {% if entry.log.content_type %}
+                                                {{ entry.log.content_type.name }}
                                             {% else %}
                                                 نامشخص
                                             {% endif %}
                                         </td>
                                         <td>
-                                            {% jdate entry.action_time %}
+                                            {{ entry.jpublished }}
                                         </td>
                                     </tr>
                                 {% endfor %}
