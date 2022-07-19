@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from accounts.admin import UserAdminPanel
-from accounts.models import User
 
 
 class TestAdminSite(TestCase):
@@ -12,9 +11,9 @@ class TestAdminSite(TestCase):
                     username='ehsan', password='123', first_name='ehsan', last_name='ronaldo', email='sam@sample.com')
         get_user_model().objects.create_user(
                     username='ab', password='123', first_name='abraham', email='abraham@gmail.com')
-        user_obj1 = User.objects.get(id=1)
+        user_obj1 = get_user_model().objects.get(id=1)
         admin_function_result = UserAdminPanel.user_full_name(self, obj=user_obj1)
         self.assertEqual(admin_function_result, 'ehsan ronaldo')
-        user_obj2 = User.objects.get(id=2)
+        user_obj2 = get_user_model().objects.get(id=2)
         admin_function_result = UserAdminPanel.user_full_name(self, obj=user_obj2)
         self.assertEqual(admin_function_result, 'abraham')
