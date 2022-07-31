@@ -79,7 +79,21 @@ class TestBlog(TestCase):
     def test_thumb(self):
         """Test thumbnail of article"""
         post = Blog.objects.create()
-        small_gif = b''
-        uploaded = SimpleUploadedFile('small.jpg', small_gif, content_type='image/gif')
+        blank_image = b''
+        uploaded = SimpleUploadedFile('small.jpg', blank_image)
         post.image = uploaded
         self.assertIn(post.image.url, post.thumb())
+
+    def test_show_url(self):
+        """Test show_url method of Blog instance"""
+        url = reverse("blog:single", args=[self.post1.slug])
+        self.assertIn(url, self.post1.show_url())
+
+    def test_category_list(self):
+        """Test category_list method of Blog instance"""
+        cat1 = Category.objects.create(title='cat1', slug='cat1')
+        cat2 = Category.objects.create(title='cat2', slug='cat2')
+        cat3 = Category.objects.create(title='cat3', slug='cat3')
+        post = Blog.objects.create()
+        post.category.set([cat1, cat2])
+        self.assertEqual(post.category_list(), 'cat1، cat2')
