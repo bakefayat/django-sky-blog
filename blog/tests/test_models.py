@@ -1,9 +1,10 @@
 from django.test import TestCase
+from django.urls import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
 from datetime import datetime
 import pytz
 from config.settings import TIME_ZONE
 from blog.models import Category, Blog, Comment
-from django.urls import reverse
 
 
 class TestCategory(TestCase):
@@ -53,3 +54,32 @@ class TestComment(TestCase):
         time_zone = pytz.timezone(TIME_ZONE)
         self.comment1.created = datetime(year=2022, month=11, day=28, hour=23, minute=55, second=12, tzinfo=time_zone)
         self.assertEqual(self.comment1.jpublished(), '7 آذر 1401, ساعت 23:55')
+
+
+class TestBlog(TestCase):
+    def setUp(self):
+        self.post1 = Blog.objects.create(title='post1', slug='post1',)
+        self.post2 = Blog.objects.create(title='post2', slug='post2',)
+
+    def test_str_representation(self):
+        """Test str magic method of Blog objects"""
+        self.assertEqual(str(self.post1), 'post1')
+
+    def test_get_absolute_url(self):
+        """Test get_absolute_url of Blog objects"""
+        url = reverse("accounts:detail", args=[self.post1.slug])
+        self.assertEqual(self.post1.get_absolute_url(), url)
+
+    def test_jpublished(self):
+        """Test blog article creation time as jalali date"""
+        time_zone = pytz.timezone(TIME_ZONE)
+        self.post1.published = datetime(year=2022, month=11, day=28, hour=23, minute=55, second=12, tzinfo=time_zone)
+        self.assertEqual(self.post1.jpublished(), '7 آذر 1401, ساعت 23:55')
+
+    def test_thumb(self):
+        """Test thumbnail of article"""
+        post = Blog.objects.create()
+        small_gif = b''
+        uploaded = SimpleUploadedFile('small.jpg', small_gif, content_type='image/gif')
+        post.image = uploaded
+        self.assertIn(post.image.url, post.thumb())
