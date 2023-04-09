@@ -1,4 +1,5 @@
 from django import template
+from django.core.exceptions import ObjectDoesNotExist
 from blog.models import Category, Blog
 from extensions.utils import to_jalali
 from pages.models import Page
@@ -53,9 +54,11 @@ def active(request, content, url_name, fa):
 @register.simple_tag()
 def site_profile(item):
     current_site = Site.objects.get_current()
-    profile = SiteProfile.objects.get(site=current_site)
-    return profile.__getattribute__(item)
-
+    try:
+        profile = SiteProfile.objects.get(site=current_site)
+        return profile.__getattribute__(item)
+    except ObjectDoesNotExist:
+        return 'جنگو آسمان'
 
 # convert date to jalali
 @register.simple_tag()
