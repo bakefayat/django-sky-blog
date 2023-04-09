@@ -107,9 +107,11 @@ class Blog(TimeStampedModel):
         return self.title
 
     def show_url(self):
-        url = reverse("blog:single", kwargs={"slug": self.slug})
-        response = format_html(f'<a href="{url}">{self.title}</a>')
-        return response
+        if self.slug:
+            url = reverse("blog:single", kwargs={"slug": self.slug})
+            response = format_html(f'<a href="{url}">{self.title}</a>')
+            return response
+        return 'برای مشاهده لینک مقاله ابتدا باید آن را منشتر کنید.'
 
     def get_absolute_url(self):
         return reverse("accounts:detail", kwargs={"slug": self.slug})
