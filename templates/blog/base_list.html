@@ -33,7 +33,12 @@
                 </p>
                 <a href="{% url 'blog:user' article.author.username%}">
                     <sm>
-                        نویسنده: {{ article.author.get_full_name }}
+                        نویسنده: 
+                        {% if article.author.get_full_name %}
+                        {{ article.author.get_full_name }}
+                        {% else %}
+                        نویسنده سایت
+                        {% endif %}
                     </sm>
                 </a>
                 {% for cat in article.category.shown %}
