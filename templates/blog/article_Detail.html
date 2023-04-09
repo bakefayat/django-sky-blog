@@ -51,7 +51,10 @@
                               {{ comment.body|safe|linebreaks }}
                             <hr>
                             </div>
+                            {% empty %}
+                                اولین نظر را ثبت کن!
                             {% endfor %}
+                            
                         </li>
                     </ul>
                 </div>
