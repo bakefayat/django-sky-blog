@@ -96,6 +96,7 @@ class Blog(TimeStampedModel):
         return "، ".join([i.title for i in self.category.shown()])
 
     def jpublished(self):
+        #convert Gregorian to jalali date
         return to_jalali(self.published)
 
     def thumb(self):
@@ -152,6 +153,7 @@ class Comment(TimeStampedModel):
         return self.body
 
     def jpublished(self):
+        #convert Gregorian to jalali date
         return to_jalali(self.created)
 
     def get_absolute_url(self):
