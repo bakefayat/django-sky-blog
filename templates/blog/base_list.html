@@ -31,16 +31,17 @@
                         <p>شما دسترسی ندارید.</p>
                     {% endif %}
                 </p>
-                <a href="{% url 'blog:user' article.author.username%}">
                     <sm>
-                        نویسنده: 
-                        {% if article.author.get_full_name %}
-                        {{ article.author.get_full_name }}
-                        {% else %}
-                        نویسنده سایت
-                        {% endif %}
+                        <i class="bi bi-person-circle"></i> نویسنده: 
+                        <a href="{% url 'blog:user' article.author.username%}">
+                            {% if article.author.get_full_name %}
+                                {{ article.author.get_full_name }}
+                            {% else %}
+                                نویسنده سایت
+                            {% endif %}
+                        </a>
                     </sm>
-                </a>
+                <i class="bi bi-card-list"></i> دسته بندی:
                 {% for cat in article.category.shown %}
                     <a href="{% url 'blog:category' cat.slug %}">
                         #{{ cat.title }}
