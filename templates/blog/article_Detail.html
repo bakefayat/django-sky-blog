@@ -10,7 +10,9 @@
 {% endblock %}
 {% block blog_post %}
     <div class="card mb-1">
-        <img class="card-img-top" src="{{ object.image.url }}"  alt="{{ object.slug}}" style='height:300px;' />
+        {% if article.image %}
+            <img class="card-img-top" src="{{ object.image.url }}"  alt="{{ object.slug}}" style='height:300px;' />
+        {% endif %}
         <div class="card-body">
 
             <div class="small text-muted">

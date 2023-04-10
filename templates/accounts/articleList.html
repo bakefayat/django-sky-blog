@@ -28,7 +28,11 @@
                                             </a>
                                         </td>
                                         <td class='d-none d-lg-table-cell'>
-                                            <img src='{{ article.image.url }}' class='img-responsive' width=120px>
+                                            {% if article.image %}
+                                                <img src='{{ article.image.url }}' class='img-responsive' width=120px>
+                                            {% else %}
+                                            -
+                                            {% endif %}
                                         </td>
                                         <td class='d-none d-lg-table-cell'>
                                             {{ article.description|safe|truncatewords:'20' }}

@@ -82,7 +82,7 @@ class Blog(TimeStampedModel):
         verbose_name="نویسنده",
     )
     description = models.TextField(max_length=1000, verbose_name="توضیحات")
-    image = models.ImageField(upload_to="images", verbose_name="تصویر شاخص")
+    image = models.ImageField(upload_to="images", blank=True, null=True, verbose_name="تصویر شاخص")
     published = models.DateTimeField(default=timezone.now, verbose_name="تاریخ انتشار")
     is_special = models.BooleanField(
         verbose_name="مقاله ویژه",
@@ -100,9 +100,10 @@ class Blog(TimeStampedModel):
         return to_jalali(self.published)
 
     def thumb(self):
-        return format_html(
-            f"<img src='{self.image.url}' height=80px width=100px style='border-radius:20px;'>"
-        )
+        if self.image:
+            return format_html(
+                f"<img src='{self.image.url}' height=80px width=100px style='border-radius:20px;'>"
+            )
 
     def __str__(self):
         return self.title

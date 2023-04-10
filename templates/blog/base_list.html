@@ -9,7 +9,9 @@
 {% block blog_post %}
     {% for article in object_list %}
         <div class="card mb-4">
-            <a href="{% url 'blog:single' article.slug %}"><img class="card-img-top" src="{{ article.image.url }}"  alt="{{ article.slug}}" style='height:300px;' /></a>
+            {% if article.image %}
+                <a href="{% url 'blog:single' article.slug %}"><img class="card-img-top" src="{{ article.image.url }}"  alt="{{ article.slug}}" style='height:300px;' /></a>
+            {%endif %}
             <div class="card-body">
                 <div class="small text-muted">
                     {% if article.is_special %}
